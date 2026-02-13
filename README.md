@@ -1,29 +1,63 @@
-# Astro Starter Kit: Minimal
+# Astro Starter Kit: Web Site
 
 ```sh
-npm create astro@latest -- --template minimal
+npm run dev
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+└── 📁kharma-solutions
+    └── 📁public
+        ├── favicon.ico
+        ├── favicon.svg
+        ├── manifest.json
+        ├── robots.txt
+    └── 📁src
+        └── 📁assets
+            └── 📁images
+                ├── logo.svg
+        └── 📁components
+            └── 📁global
+                ├── Footer.astro
+                ├── Header.astro
+                ├── WhatsAppButton.astro
+            └── 📁sections
+                ├── About.astro
+                ├── Contact.astro
+                ├── Hero.astro
+                ├── Plans.astro
+                ├── Services.astro
+            └── 📁seo
+                ├── SchemaMarkup.astro
+                ├── SEOHead.astro
+            └── 📁ui
+                ├── Button.astro
+                ├── Card.astro
+                ├── SectionTitle.astro
+        └── 📁data
+            ├── plans.ts
+            ├── services.ts
+            ├── site.ts
+        └── 📁layouts
+            ├── LegalLayout.astro
+            ├── MainLayout.astro
+        └── 📁pages
+            ├── 404.astro
+            ├── aviso-legal.astro
+            ├── index.astro
+            ├── politica-de-privacidad.astro
+            ├── terminos-y-condiciones.astro
+        └── 📁styles
+            ├── global.css
+        └── 📁utils
+            ├── helpers.ts
+    ├── astro.config.mjs
+    ├── package-lock.json
+    ├── package.json
+    └── tsconfig.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
@@ -38,7 +72,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-# structure-website
