@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kharmasolutions.com/sitemap-index.xml
+
+Disallow: /404

@@ -1,0 +1,29 @@
+---
+import { siteConfig } from '../../data/site';
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": siteConfig.name,
+  "description": siteConfig.description,
+  "url": siteConfig.url,
+  "telephone": siteConfig.phone,
+  "email": siteConfig.email,
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": siteConfig.address.state,
+    "addressCountry": "MX"
+  },
+  "serviceType": [
+    "Desarrollo de sitios web",
+    "Landing pages",
+    "Sistemas de administración web",
+    "Diseño web"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "México"
+  },
+  "priceRange": "$2,499 - $14,999 MXN"
+})} />

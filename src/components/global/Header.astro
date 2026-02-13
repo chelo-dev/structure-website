@@ -1,0 +1,406 @@
+---
+// src/components/global/Header.astro
+import { siteConfig } from '../../data/site';
+---
+
+<header class="header" id="header">
+  <nav class="header__nav" aria-label="Navegación principal">
+    <div class="header__container">
+      <!-- Logo -->
+      <a href="#inicio" class="header__logo" aria-label={`${siteConfig.name} - Inicio`}>
+        <div class="header__logo-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#logoGradient)" stroke-width="2.5" fill="none" />
+            <circle cx="12" cy="12" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="18" cy="12" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="24" cy="12" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="12" cy="18" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="18" cy="18" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="24" cy="18" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="12" cy="24" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="18" cy="24" r="2.5" fill="url(#logoGradient)" />
+            <circle cx="24" cy="24" r="2.5" fill="url(#logoGradient)" />
+            <defs>
+              <linearGradient id="logoGradient" x1="0" y1="0" x2="36" y2="36">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="header__logo-text">
+          <span class="header__logo-name">NOMBRE</span>
+          <span class="header__logo-tagline">EMPRESA</span>
+        </div>
+      </a>
+
+      <!-- Navegación desktop -->
+      <ul class="header__menu" id="nav-menu" role="list">
+        {siteConfig.nav.map((item) => (
+          <li> <a href={item.href}
+              class="header__link"
+              data-section={item.href.replace('#', '')}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Botón hamburguesa mobile -->
+      <button
+        class="header__toggle"
+        id="nav-toggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <span class="header__toggle-bar"></span>
+        <span class="header__toggle-bar"></span>
+        <span class="header__toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menú mobile -->
+  <div class="header__mobile" id="nav-mobile" aria-hidden="true">
+    <ul class="header__mobile-menu" role="list">
+      {siteConfig.nav.map((item) => (
+        <li>
+          <a href={item.href}
+            class="header__mobile-link"
+            data-section={item.href.replace('#', '')}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<style>
+  /* ========================================
+     Header - Sticky con glassmorphism
+     ======================================== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-gray-100);
+    transition: box-shadow var(--transition-base);
+  }
+
+  .header.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  .header__nav {
+    height: 100%;
+  }
+
+  .header__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ========================================
+     Logo
+     ======================================== */
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  .header__logo-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .header__logo-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--color-gray-800);
+  }
+
+  .header__logo-tagline {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-gray-400);
+  }
+
+  /* ========================================
+     Menú desktop
+     ======================================== */
+  .header__menu {
+    display: none;
+    list-style: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-gray-600);
+    border-radius: var(--radius-full);
+    border: 1.5px solid transparent;
+    transition:
+      color var(--transition-fast),
+      background var(--transition-base),
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .header__link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-gray-200);
+    background: var(--color-gray-50);
+    transform: translateY(-1px);
+  }
+
+  /* Estado activo */
+  .header__link.active {
+    color: var(--color-text-inverse);
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+  }
+
+  .header__link.active:hover {
+    background: var(--gradient-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.45);
+  }
+
+  /* ========================================
+     Botón hamburguesa
+     ======================================== */
+  .header__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .header__toggle:hover {
+    background: var(--color-gray-100);
+  }
+
+  .header__toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-gray-700);
+    border-radius: 2px;
+    transition:
+      transform var(--transition-base),
+      opacity var(--transition-base);
+    transform-origin: center;
+  }
+
+  .header__toggle.open .header__toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .header__toggle.open .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__toggle.open .header__toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ========================================
+     Menú mobile
+     ======================================== */
+  .header__mobile {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-gray-100);
+    padding: 1rem var(--container-padding);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform var(--transition-base),
+      opacity var(--transition-base),
+      visibility var(--transition-base);
+    z-index: 999;
+  }
+
+  .header__mobile.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header__mobile-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .header__mobile-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-gray-600);
+    border-radius: var(--radius-md);
+    transition:
+      color var(--transition-fast),
+      background var(--transition-fast);
+  }
+
+  .header__mobile-link:hover,
+  .header__mobile-link.active {
+    color: var(--color-primary);
+    background: var(--color-gray-50);
+  }
+
+  .header__mobile-link.active {
+    color: var(--color-text-inverse);
+    background: var(--gradient-primary);
+  }
+
+  /* ========================================
+     Responsive
+     ======================================== */
+  @media (min-width: 768px) {
+    .header__menu {
+      display: flex;
+    }
+
+    .header__toggle {
+      display: none;
+    }
+
+    .header__mobile {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('header');
+    const toggle = document.getElementById('nav-toggle');
+    const mobile = document.getElementById('nav-mobile');
+    const allLinks = document.querySelectorAll('[data-section]');
+    const sections = document.querySelectorAll('section[id]');
+
+    // --- Toggle mobile menu ---
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.classList.toggle('open');
+      mobile?.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      mobile?.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // --- Cerrar mobile al hacer click en un link ---
+    mobile?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggle?.classList.remove('open');
+        mobile?.classList.remove('open');
+        toggle?.setAttribute('aria-expanded', 'false');
+        mobile?.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // --- Header shadow al hacer scroll ---
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    };
+
+    // --- Scroll spy: detectar sección activa ---
+    const handleScrollSpy = () => {
+      const scrollPos = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          allLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-section') === sectionId) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    };
+
+    // --- Activar "Inicio" por defecto ---
+    allLinks.forEach((link) => {
+      if (link.getAttribute('data-section') === 'inicio') {
+        link.classList.add('active');
+      }
+    });
+
+    // --- Listeners optimizados ---
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          handleScrollSpy();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    handleScroll();
+  });
+</script>

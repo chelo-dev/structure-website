@@ -1,0 +1,33 @@
+---
+import SEOHead from '../components/seo/SEOHead.astro';
+import SchemaMarkup from '../components/seo/SchemaMarkup.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <SEOHead title={title} description={description} noindex={noindex} />
+    <SchemaMarkup />
+  </head>
+  <body>
+    <a href="#contenido-principal" class="skip-link">
+      Saltar al contenido principal
+    </a>
+    <Header />
+    <main id="contenido-principal">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

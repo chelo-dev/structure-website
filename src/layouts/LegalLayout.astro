@@ -1,0 +1,30 @@
+---
+import SEOHead from '../components/seo/SEOHead.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <SEOHead title={title} description={description} noindex={true} />
+  </head>
+  <body>
+    <Header />
+    <main id="contenido-principal" class="legal-page">
+      <article class="legal-container">
+        <h1>{title}</h1>
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>
