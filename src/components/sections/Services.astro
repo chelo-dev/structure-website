@@ -1,5 +1,364 @@
-<section id="servicios" class="section">
-  <div class="container">
-    <h2>Servicios</h2>
+---
+import { services } from '../../data/services';
+---
+
+<section id="servicios" class="services">
+  <!-- Decoración de fondo -->
+  <div class="services__bg" aria-hidden="true">
+    <div class="services__bg-blur services__bg-blur--1"></div>
+    <div class="services__bg-blur services__bg-blur--2"></div>
+  </div>
+
+  <div class="services__container">
+    <!-- Header -->
+    <div class="services__header" data-reveal>
+      <span class="services__label">Nuestros servicios</span>
+      <h2 class="services__title">
+        Soluciones web que
+        <span class="services__title-gradient">impulsan tu negocio</span>
+      </h2>
+      <p class="services__subtitle">
+        En Kharma Solutions convertimos tus ideas en experiencias digitales que
+        venden, inspiran y posicionan tu marca en internet.
+      </p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="services__grid">
+      {services.map((service, index) => (
+        <article
+          class="service-card"
+          data-reveal
+          data-reveal-delay={index * 150}
+        >
+          <!-- Borde gradiente animado -->
+          <div class="service-card__border" aria-hidden="true"></div>
+
+          <div class="service-card__inner">
+            <!-- Icono -->
+            <div class="service-card__icon-wrapper">
+              <div class="service-card__icon">
+                {service.icon === 'web' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                )}
+                {service.icon === 'custom' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                    <line x1="14" y1="4" x2="10" y2="20" />
+                  </svg>
+                )}
+                {service.icon === 'social' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                  </svg>
+                )}
+                {service.icon === 'hosting' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  </svg>
+                )}
+              </div>
+            </div>
+
+            <!-- Contenido -->
+            <h3 class="service-card__title">{service.title}</h3>
+            <p class="service-card__description">{service.description}</p>
+
+            <!-- Features list -->
+            <ul class="service-card__features">
+              {service.features.map((feature) => (
+                <li class="service-card__feature">
+                  <svg class="service-card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  /* ========================================
+     Services Section
+     ======================================== */
+  .services {
+    position: relative;
+    padding: 6rem 0;
+    background: var(--color-gray-900);
+    overflow: hidden;
+  }
+
+  .services__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .services__bg-blur {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+  }
+
+  .services__bg-blur--1 {
+    width: 500px;
+    height: 500px;
+    background: var(--color-primary);
+    top: -10%;
+    right: -10%;
+    animation: float-slow 20s ease-in-out infinite alternate;
+  }
+
+  .services__bg-blur--2 {
+    width: 400px;
+    height: 400px;
+    background: #8b5cf6;
+    bottom: -10%;
+    left: -10%;
+    animation: float-slow 25s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes float-slow {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, -30px); }
+  }
+
+  .services__container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* ========================================
+     Header
+     ======================================== */
+  .services__header {
+    max-width: 640px;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+  }
+
+  .services__label {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary-light);
+    margin-bottom: 1rem;
+  }
+
+  .services__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-white);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .services__title-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .services__subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-gray-400);
+  }
+
+  /* ========================================
+     Grid
+     ======================================== */
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* ========================================
+     Service Card
+     ======================================== */
+  .service-card {
+    position: relative;
+    border-radius: calc(var(--radius-lg) + 2px);
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background var(--transition-base);
+  }
+
+  .service-card:hover {
+    background: transparent;
+  }
+
+  /* Borde gradiente animado */
+  .service-card__border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--gradient-primary);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .service-card:hover .service-card__border {
+    opacity: 1;
+  }
+
+  /* Inner */
+  .service-card__inner {
+    position: relative;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    height: 100%;
+  }
+
+  /* Icono */
+  .service-card__icon-wrapper {
+    margin-bottom: 1.25rem;
+  }
+
+  .service-card__icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    transition: transform var(--transition-fast), box-shadow var(--transition-base);
+  }
+
+  .service-card:hover .service-card__icon {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
+  }
+
+  .service-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Contenido */
+  .service-card__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 0.625rem;
+  }
+
+  .service-card__description {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-gray-400);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Features */
+  .service-card__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-card__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-gray-300);
+  }
+
+  .service-card__check {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--color-primary-light);
+  }
+
+  /* ========================================
+     Reveal animations
+     ======================================== */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========================================
+     Responsive
+     ======================================== */
+  @media (min-width: 640px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .services {
+      padding: 7rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Las 4 cards en 2x2 centradas */
+    .services__grid {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script>
+  import { initReveal } from '../../utils/reveal';
+  document.addEventListener('DOMContentLoaded', initReveal);
+</script>

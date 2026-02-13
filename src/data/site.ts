@@ -4,8 +4,8 @@ export const siteConfig = {
     url: 'https://kharmasolutions.com',
     ogImage: '/og-image.jpg',
     locale: 'es_MX',
-    phone: '+521XXXXXXXXXX', // Tu número de WhatsApp
-    email: 'contacto@kharmasolutions.com',
+    phone: '+527775944783',
+    email: 'angelparedestorres.apt@gmail.com',
     address: {
         state: 'Morelos',
         country: 'México',

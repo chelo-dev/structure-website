@@ -1,5 +1,614 @@
-<section id="inicio" class="section">
-  <div class="container">
-    <h1>Hero</h1>
+---
+// src/components/sections/Hero.astro
+import { siteConfig } from '../../data/site';
+
+const whatsappMessage = encodeURIComponent(
+  '¡Hola Kharma Solutions! Me interesa conocer más sobre sus servicios de desarrollo web.'
+);
+const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`;
+
+const channels = [
+  { name: 'WhatsApp', icon: '/images/channels/whatsapp.svg' },
+  { name: 'Google', icon: '/images/channels/google.svg' },
+  { name: 'Instagram', icon: '/images/channels/instagram.svg' },
+  { name: 'Messenger', icon: '/images/channels/messenger.svg' },
+  { name: 'Email', icon: '/images/channels/sms.svg' },
+  { name: 'Telegram', icon: '/images/channels/telegram.svg' },
+];
+---
+
+<section id="inicio" class="hero">
+  <!-- Partículas de fondo -->
+  <div id="hero-particles" class="hero__particles" aria-hidden="true"></div>
+
+  <!-- Gradiente overlay -->
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__container">
+    <!-- Contenido izquierdo -->
+    <div class="hero__content">
+      <span class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        Desarrollo web profesional
+      </span>
+
+      <h1 class="hero__title">
+        Transformamos tu idea en una
+        <span class="hero__title-gradient">experiencia digital</span>
+        que genera resultados
+      </h1>
+
+      <p class="hero__description">
+        Diseñamos y desarrollamos sitios web de alto rendimiento, landing pages
+        que convierten y sistemas de administración a medida para impulsar tu
+        negocio al siguiente nivel.
+      </p>
+
+      <div class="hero__actions">
+        
+          <a href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero__btn hero__btn--primary"
+          aria-label="Contactar por WhatsApp"
+        >
+          <svg class="hero__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+          </svg>
+          Cotiza tu proyecto
+        </a>
+
+        <a href="#servicios" class="hero__btn hero__btn--secondary">
+          Ver servicios
+          <svg class="hero__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Trust signals -->
+      <div class="hero__trust">
+        <div class="hero__trust-item">
+          <span class="hero__trust-number">50+</span>
+          <span class="hero__trust-label">Proyectos entregados</span>
+        </div>
+        <div class="hero__trust-divider" aria-hidden="true"></div>
+        <div class="hero__trust-item">
+          <span class="hero__trust-number">100%</span>
+          <span class="hero__trust-label">Clientes satisfechos</span>
+        </div>
+        <div class="hero__trust-divider" aria-hidden="true"></div>
+        <div class="hero__trust-item">
+          <span class="hero__trust-number">5★</span>
+          <span class="hero__trust-label">Calificación promedio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recurso planetario -->
+    <div class="hero__orbit-wrapper" aria-hidden="true">
+      <div class="channels">
+        <!-- Círculo punteado -->
+        <div class="channels__circle"></div>
+
+        <!-- Órbita -->
+        <div class="channels__orbit">
+          {channels.map((channel, i) => (
+            <div class="channels__item" style={`--i: ${i}; --total: ${channels.length}`}>
+              <div class="channels__icon">
+                <img
+                  src={channel.icon}
+                  alt={channel.name}
+                  width="48"
+                  height="48"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Núcleo central -->
+        <div class="channels__nucleus">
+          <div class="channels__glow"></div>
+          <div class="channels__ring"></div>
+          <div class="channels__logo">
+            <svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="32" height="32" rx="8" stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none" />
+              <circle cx="12" cy="12" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="18" cy="12" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="24" cy="12" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="12" cy="18" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="18" cy="18" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="24" cy="18" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="12" cy="24" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="18" cy="24" r="2.5" fill="rgba(255,255,255,0.9)" />
+              <circle cx="24" cy="24" r="2.5" fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  /* ========================================
+     Hero Section
+     ======================================== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--color-gray-900);
+    overflow: hidden;
+    padding: 6rem 0 4rem;
+  }
+
+  .hero__particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+    z-index: 1;
+  }
+
+  .hero__container {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  /* ========================================
+     Contenido
+     ======================================== */
+  .hero__content {
+    position: relative;
+    z-index: 3;
+    max-width: 600px;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-primary-light);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badge-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-white);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__title-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__description {
+    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    line-height: 1.7;
+    color: var(--color-gray-400);
+    margin-bottom: 2rem;
+    max-width: 520px;
+  }
+
+  /* ========================================
+     Botones
+     ======================================== */
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8125rem 1.625rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-base),
+      background var(--transition-base);
+  }
+
+  .hero__btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero__btn-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .hero__btn--primary {
+    color: var(--color-white);
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+  }
+
+  .hero__btn--primary:hover {
+    background: var(--gradient-primary-hover);
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
+  }
+
+  .hero__btn--secondary {
+    color: var(--color-gray-300);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  .hero__btn--secondary:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.06);
+  }
+
+  /* ========================================
+     Trust signals
+     ======================================== */
+  .hero__trust {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .hero__trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .hero__trust-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .hero__trust-label {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+  }
+
+  .hero__trust-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ========================================
+     Recurso planetario
+     ======================================== */
+  .hero__orbit-wrapper {
+    position: absolute;
+    top: 50%;
+    right: -30%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .channels {
+    position: relative;
+    width: min(480px, 75vw);
+    height: min(480px, 75vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Círculo punteado */
+  .channels__circle {
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+  }
+
+  /* Órbita contenedora */
+  .channels__orbit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: orbit-rotate 80s linear infinite;
+  }
+
+  /* Cada item orbital */
+  .channels__item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transform: rotate(calc(360deg / var(--total) * var(--i)));
+  }
+
+  .channels__icon {
+    position: absolute;
+    width: clamp(64px, 12vw, 88px);
+    height: clamp(64px, 12vw, 88px);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: orbit-counter-rotate 80s linear infinite;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .channels__icon:hover {
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+  }
+
+  .channels__icon img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+  }
+
+  /* Núcleo central */
+  .channels__nucleus {
+    position: relative;
+    z-index: 5;
+    width: clamp(110px, 20vw, 160px);
+    height: clamp(110px, 20vw, 160px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .channels__glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    animation: nucleus-glow 3s ease-in-out infinite alternate;
+  }
+
+  .channels__ring {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    animation: ring-rotate 10s linear infinite;
+  }
+
+  .channels__logo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Animaciones del planetario */
+  @keyframes orbit-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes orbit-counter-rotate {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(-360deg); }
+  }
+
+  @keyframes nucleus-glow {
+    0% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(139, 92, 246, 0.3);
+    }
+  }
+
+  @keyframes ring-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ========================================
+     Responsive
+     ======================================== */
+  @media (min-width: 1024px) {
+    .hero__container {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .hero__orbit-wrapper {
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 5rem 0 3rem;
+    }
+
+    .hero__actions {
+      flex-direction: column;
+    }
+
+    .hero__btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .hero__trust {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero__trust-divider {
+      display: none;
+    }
+
+    .hero__trust-item {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero__orbit-wrapper {
+      right: -40%;
+      opacity: 0.25;
+    }
+  }
+</style>
+
+<script>
+  // ========================================
+  // Particles.js - Configuración
+  // ========================================
+  async function initParticles() {
+    const { tsParticles } = await import('tsparticles-engine');
+    const { loadSlim } = await import('tsparticles-slim');
+
+    await loadSlim(tsParticles);
+
+    await tsParticles.load('hero-particles', {
+      fullScreen: { enable: false },
+      fpsLimit: 60,
+      particles: {
+        
+        number: {
+          value: 60,
+          density: { enable: true, value_area: 800 }
+        },
+        color: {
+          value: ['#3b82f6', '#8b5cf6', '#60a5fa'],
+        },
+        shape: {
+            type: 'circle',
+            stroke: { width: 0, color: '#000000' },
+            polygon: { nb_sides: 5 }
+        },
+        opacity: {
+          value: { min: 0.1, max: 0.5 },
+          animation: {
+            enable: true,
+            speed: 0.8,
+            sync: false,
+          },
+        },
+        size: {
+          value: { min: 1, max: 3 },
+          animation: {
+            enable: true,
+            speed: 2,
+            sync: false,
+          },
+        },
+        links: {
+          enable: true,
+          distance: 140,
+          color: '#3b82f6',
+          opacity: 0.08,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: 'none',
+          outModes: {
+            default: 'out',
+          },
+        },
+      },
+      interactivity: {
+        events: {
+          onHover: {
+            enable: true,
+            mode: 'grab',
+          },
+        },
+        modes: {
+          grab: {
+            distance: 150,
+            links: {
+              opacity: 0.2,
+            },
+          },
+        },
+      },
+      detectRetina: true,
+    });
+  }
+
+  // Reducir partículas si el usuario prefiere movimiento reducido
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    initParticles();
+  }
+</script>
