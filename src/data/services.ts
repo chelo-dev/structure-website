@@ -46,9 +46,9 @@ export const services: Service[] = [
     icon: 'hosting',
     title: 'Dominio y Hosting por 1 Año',
     description:
-      'Publica tu sitio sin preocupaciones. Incluimos dominio .COM.MX y hosting premium gratis el primer año con soporte técnico especializado.',
+      'Publica tu sitio sin preocupaciones. Incluimos dominio .COM y hosting premium gratis el primer año con soporte técnico especializado.',
     features: [
-      'Dominio .COM.MX incluido',
+      'Dominio .COM incluido',
       'Hosting premium de alto rendimiento',
       'Certificado SSL de seguridad',
       'Soporte técnico incluido',

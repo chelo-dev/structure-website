@@ -1,3 +1,314 @@
-<section>
-    <h2>Kharma Solutions</h2>
-</section>
+---
+import { siteConfig } from '../../data/site';
+
+const currentYear = new Date().getFullYear();
+
+const whatsappMessage = encodeURIComponent(
+  '¡Hola Kharma Solutions! Me interesa conocer más sobre sus servicios.'
+);
+const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`;
+---
+
+<footer class="footer">
+  <!-- Parte superior -->
+  <div class="footer__top">
+    <div class="footer__container">
+      <!-- Logo -->
+      <a href="/#inicio" class="footer__logo" aria-label={`${siteConfig.name} - Inicio`}>
+        <img
+          src="/favicon.svg"
+          alt={`${siteConfig.name} logo`}
+          width="auto"
+          height="85"
+          class="footer__logo-img"
+        />
+      </a>
+
+      <!-- Tagline -->
+      <p class="footer__tagline">
+        Desarrollamos sitios web rápidos y modernos. Hosting + Dominio
+        <strong>GRATIS</strong> el primer año. ¡Cotiza hoy mismo y lleva tu
+        negocio al siguiente nivel!
+      </p>
+
+      <!-- Links legales + WhatsApp -->
+      <nav class="footer__nav" aria-label="Enlaces legales">
+        <ul class="footer__links">
+          {siteConfig.legal.map((item) => (
+            <li>
+              <a href={item.href} class="footer__link">
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            
+            <a  href={whatsappLink}
+              class="footer__link footer__link--whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Parte inferior -->
+  <div class="footer__bottom">
+    <div class="footer__container">
+      <p class="footer__copyright">
+        &copy; {currentYear} <strong>{siteConfig.name}</strong> — Todos los
+        derechos reservados.
+      </p>
+      <p class="footer__credit">
+        Diseñado por{' '}
+        
+        <a href={siteConfig.url}
+          class="footer__credit-link"
+        >
+          {siteConfig.name}
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón scroll to top -->
+<button
+  id="scroll-top"
+  class="scroll-top"
+  aria-label="Volver al inicio"
+  title="Volver al inicio"
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M18 15l-6-6-6 6" />
+  </svg>
+</button>
+
+<style>
+  /* ========================================
+     Footer
+     ======================================== */
+  .footer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* ========================================
+     Footer Top
+     ======================================== */
+  .footer__top {
+    padding: 3.5rem 0 2.5rem;
+    background: linear-gradient(165deg, #0f2a5e 0%, #0a1a3a 50%, #060e1f 100%);
+    text-align: center;
+  }
+
+  /* Logo */
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer__logo-img {
+    width: auto;
+    height: 85px;
+    object-fit: contain;
+  }
+
+  /* Tagline */
+  .footer__tagline {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .footer__tagline strong {
+    color: #facc15;
+    font-weight: 700;
+  }
+
+  /* Nav links */
+  .footer__nav {
+    margin-bottom: 0;
+  }
+
+  .footer__links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .footer__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #facc15;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #facc15;
+    transition: width var(--transition-base);
+  }
+
+  .footer__link:hover::after {
+    width: 100%;
+  }
+
+  .footer__link:hover {
+    color: #fde68a;
+  }
+
+  /* ========================================
+     Footer Bottom
+     ======================================== */
+  .footer__bottom {
+    padding: 1.5rem 0;
+    background: linear-gradient(165deg, #091633 0%, #050d1f 100%);
+    text-align: center;
+  }
+
+  .footer__copyright {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.375rem;
+  }
+
+  .footer__copyright strong {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+  }
+
+  .footer__credit {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-style: italic;
+  }
+
+  .footer__credit-link {
+    color: #facc15;
+    text-decoration: none;
+    font-weight: 600;
+    font-style: normal;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__credit-link:hover {
+    color: #fde68a;
+  }
+
+  /* ========================================
+     Scroll to top
+     ======================================== */
+  .scroll-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition:
+      opacity var(--transition-base),
+      visibility var(--transition-base),
+      transform var(--transition-base),
+      box-shadow var(--transition-fast);
+    z-index: 90;
+  }
+
+  .scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .scroll-top:hover {
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.55);
+    transform: translateY(-2px);
+  }
+
+  .scroll-top.visible:hover {
+    transform: translateY(-2px);
+  }
+
+  .scroll-top svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ========================================
+     Responsive
+     ======================================== */
+  @media (max-width: 640px) {
+    .footer__top {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .footer__links {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollTopBtn = document.getElementById('scroll-top');
+
+    // Mostrar/ocultar botón
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 500) {
+            scrollTopBtn?.classList.add('visible');
+          } else {
+            scrollTopBtn?.classList.remove('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Click para subir
+    scrollTopBtn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>

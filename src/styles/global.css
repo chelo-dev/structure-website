@@ -141,28 +141,6 @@ select {
   padding: 0 var(--container-padding);
 }
 
-.section {
-  min-height: 100vh;
-  padding: 5rem 0;
-  display: flex;
-  align-items: center;
-}
-
-.section:nth-child(even) {
-  background: var(--color-bg-alt);
-}
-
-/* Las secciones con fondo propio lo sobreescriben */
-.about,
-.hero {
-  background: initial;
-}
-
-/* Hero maneja su propio layout */
-#inicio {
-  padding: 0;
-}
-
 /* ========================================
    Scroll Reveal animations
    ======================================== */

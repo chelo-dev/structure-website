@@ -27,4 +27,86 @@ const { title, description } = Astro.props;
     </main>
     <Footer />
   </body>
+  <style is:global>
+  /* ========================================
+     Legal Pages
+     ======================================== */
+  .legal-page {
+    padding: 4rem 0;
+    background: var(--color-bg);
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .legal-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .legal-container h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: var(--color-gray-900);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-updated {
+    font-size: 0.8125rem;
+    color: var(--color-gray-400);
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+
+  .legal-container h2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-gray-800);
+    margin-top: 2rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .legal-container p {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-gray-600);
+    margin-bottom: 1rem;
+  }
+
+  .legal-container a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+  }
+
+  .legal-container a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  .legal-back {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-gray-100);
+  }
+
+  .legal-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  .legal-back a:hover {
+    color: var(--color-primary-dark);
+    transform: translateX(-4px);
+    text-decoration: none;
+  }
+</style>
 </html>

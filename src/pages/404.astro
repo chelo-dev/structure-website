@@ -1,0 +1,80 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Página no encontrada"
+  description="La página que buscas no existe."
+  noindex={true}
+>
+  <section class="page-404">
+    <div class="page-404__container">
+      <span class="page-404__code">404</span>
+      <h1 class="page-404__title">Página no encontrada</h1>
+      <p class="page-404__text">
+        Lo sentimos, la página que buscas no existe o fue movida.
+      </p>
+      <a href="/" class="page-404__btn">
+        Volver al inicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18">
+          <path d="M5 12h14" />
+          <path d="M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .page-404 {
+    min-height: calc(100vh - var(--header-height) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem var(--container-padding);
+  }
+
+  .page-404__code {
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .page-404__title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--color-gray-800);
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .page-404__text {
+    font-size: 1rem;
+    color: var(--color-gray-500);
+    margin-bottom: 2rem;
+  }
+
+  .page-404__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-white);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    transition: transform var(--transition-fast), box-shadow var(--transition-base);
+  }
+
+  .page-404__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.45);
+  }
+</style>

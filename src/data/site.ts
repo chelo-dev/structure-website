@@ -15,11 +15,11 @@ export const siteConfig = {
         instagram: '',
     },
     nav: [
-        { label: 'Inicio', href: '#inicio' },
-        { label: 'Sobre', href: '#sobre' },
-        { label: 'Servicios', href: '#servicios' },
-        { label: 'Planes', href: '#planes' },
-        { label: 'Contacto', href: '#contacto' },
+        { label: 'Inicio', href: '/#inicio' },
+        { label: 'Sobre', href: '/#sobre' },
+        { label: 'Servicios', href: '/#servicios' },
+        { label: 'Planes', href: '/#planes' },
+        { label: 'Contacto', href: '/#contacto' },
     ],
     legal: [
         { label: 'Términos y Condiciones', href: '/terminos-y-condiciones' },

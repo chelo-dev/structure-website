@@ -3,6 +3,7 @@ import SEOHead from '../components/seo/SEOHead.astro';
 import SchemaMarkup from '../components/seo/SchemaMarkup.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
+import WhatsAppButton from '../components/global/WhatsAppButton.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -29,5 +30,6 @@ const { title, description, noindex = false } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <WhatsAppButton />
   </body>
 </html>
