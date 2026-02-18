@@ -39,7 +39,7 @@
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
 
   /* Tipografía */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
 
   /* Espaciado */
   --header-height: 72px;
@@ -60,6 +60,17 @@
 }
 
 /* Reset moderno */
+
+/* Evitar flash de texto invisible */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
+}
+
 *,
 *::before,
 *::after {
@@ -72,6 +83,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
+
 
 body {
   min-height: 100dvh;
@@ -146,10 +158,23 @@ select {
    ======================================== */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
+  will-change: opacity, transform;
   transition:
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* El hero no necesita reveal delay */
+.hero [data-reveal],
+.hero__content,
+.hero__badge,
+.hero__title,
+.hero__description,
+.hero__actions,
+.hero__trust {
+  opacity: 1;
+  transform: none;
 }
 
 [data-reveal].revealed {

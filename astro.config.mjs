@@ -1,6 +1,4 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
-
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -8,11 +6,18 @@ export default defineConfig({
   integrations: [sitemap()],
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   vite: {
     build: {
       cssMinify: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            particles: ['tsparticles-engine', 'tsparticles-slim'],
+          },
+        },
+      },
     },
   },
 });

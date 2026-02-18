@@ -22,9 +22,10 @@ const { title, description, noindex = false } = Astro.props;
     <SchemaMarkup />
   </head>
   <body>
-    <a href="#contenido-principal" class="skip-link">
-      Saltar al contenido principal
-    </a>
+    <script>
+      // Marca el HTML como JS habilitado inmediatamente
+      document.documentElement.classList.add('js-loaded');
+    </script>
     <Header />
     <main id="contenido-principal">
       <slot />

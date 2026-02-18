@@ -640,8 +640,34 @@ const contactChannels = [
   import { initReveal } from '../../utils/reveal';
   document.addEventListener('DOMContentLoaded', () => {
     initReveal();
-    initContactForm();
+    loadRecaptcha();
   });
+
+  function loadRecaptcha() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const script = document.createElement('script');
+            script.src = 'https://www.google.com/recaptcha/api.js';
+            script.async = true;
+            script.defer = true;
+            script.onload = () => initContactForm();
+            document.head.appendChild(script);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      observer.observe(contactSection);
+    } else {
+      initContactForm();
+    }
+  }
 
   function initContactForm() {
     const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement;
@@ -809,7 +835,18 @@ const contactChannels = [
 
         if (data.success) {
           successAlert.hidden = false;
-          formContainer.style.display = 'none';
+
+          // Limpiar campos
+          fields.name.value = '';
+          fields.email.value = '';
+          fields.phone.value = '';
+          fields.subject.value = '';
+          fields.message.value = '';
+          charCount.textContent = '0';
+
+          setTimeout(() => {
+            successAlert.hidden = true;
+          }, 5000);
         } else {
           // Errores de validación del backend
           if (data.error_validation) {

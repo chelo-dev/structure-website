@@ -101,7 +101,8 @@ const channels = [
                   alt={channel.name}
                   width="48"
                   height="48"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -332,7 +333,7 @@ const channels = [
     justify-content: center;
     align-items: center;
     opacity: 0.35;
-    pointer-events: none;
+    pointer-events: auto;
     z-index: 1;
   }
 
@@ -519,6 +520,7 @@ const channels = [
     .hero__orbit-wrapper {
       right: -40%;
       opacity: 0.25;
+      pointer-events: none;
     }
   }
 
@@ -603,86 +605,67 @@ const channels = [
 </style>
 
 <script>
-  // ========================================
-  // Particles.js - Configuración
-  // ========================================
-  async function initParticles() {
-    const { tsParticles } = await import('tsparticles-engine');
-    const { loadSlim } = await import('tsparticles-slim');
+  function initHeroParticles() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    await loadSlim(tsParticles);
+    // No cargar en móviles para mejorar rendimiento
+    if (window.innerWidth < 768) return;
 
-    await tsParticles.load('hero-particles', {
-      fullScreen: { enable: false },
-      fpsLimit: 60,
-      particles: {
-        
-        number: {
-          value: 60,
-          density: { enable: true, value_area: 800 }
-        },
-        color: {
-          value: ['#3b82f6', '#8b5cf6', '#60a5fa'],
-        },
-        shape: {
-            type: 'circle',
-            stroke: { width: 0, color: '#000000' },
-            polygon: { nb_sides: 5 }
-        },
-        opacity: {
-          value: { min: 0.1, max: 0.5 },
-          animation: {
+    const loadParticles = async () => {
+      const { tsParticles } = await import('tsparticles-engine');
+      const { loadSlim } = await import('tsparticles-slim');
+
+      await loadSlim(tsParticles);
+
+      await tsParticles.load('hero-particles', {
+        fullScreen: { enable: false },
+        fpsLimit: 30,
+        particles: {
+          number: {
+            value: 30,
+            density: { enable: true, area: 1200 },
+          },
+          color: {
+            value: ['#3b82f6', '#8b5cf6'],
+          },
+          opacity: {
+            value: { min: 0.1, max: 0.3 },
+          },
+          size: {
+            value: { min: 1, max: 2 },
+          },
+          links: {
             enable: true,
-            speed: 0.8,
-            sync: false,
+            distance: 120,
+            color: '#3b82f6',
+            opacity: 0.06,
+            width: 1,
           },
-        },
-        size: {
-          value: { min: 1, max: 3 },
-          animation: {
+          move: {
             enable: true,
-            speed: 2,
-            sync: false,
+            speed: 0.4,
+            direction: 'none',
+            outModes: { default: 'out' },
           },
         },
-        links: {
-          enable: true,
-          distance: 140,
-          color: '#3b82f6',
-          opacity: 0.08,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 0.6,
-          direction: 'none',
-          outModes: {
-            default: 'out',
+        interactivity: {
+          events: {
+            onHover: { enable: false },
           },
         },
-      },
-      interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: 'grab',
-          },
-        },
-        modes: {
-          grab: {
-            distance: 150,
-            links: {
-              opacity: 0.2,
-            },
-          },
-        },
-      },
-      detectRetina: true,
-    });
+        detectRetina: true,
+      });
+    };
+
+    // Esperar a que la página esté completamente cargada
+    if (document.readyState === 'complete') {
+      setTimeout(loadParticles, 1000);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(loadParticles, 1000);
+      });
+    }
   }
 
-  // Reducir partículas si el usuario prefiere movimiento reducido
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    initParticles();
-  }
+  initHeroParticles();
 </script>
