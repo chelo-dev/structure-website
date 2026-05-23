@@ -22,8 +22,23 @@ export const siteConfig = {
         { label: 'Contacto', href: '/#contacto' },
     ],
     legal: [
-        { label: 'Términos y Condiciones', href: '/terminos-y-condiciones' },
+        { label: 'Términos y Condiciones', href: 'terminos-y-condiciones' },
         { label: 'Aviso Legal', href: '/aviso-legal' },
         { label: 'Política de Privacidad', href: '/politica-de-privacidad' },
     ],
 };
+
+export const whatsappMessage = encodeURIComponent(
+  '¡Hola Kharma Solutions! Me interesa conocer más sobre sus servicios de desarrollo web.'
+);
+
+export const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`;
+
+export const channels = [
+  { name: 'WhatsApp', icon: '/images/channels/whatsapp.svg' },
+  { name: 'Google', icon: '/images/channels/google.svg' },
+  { name: 'Instagram', icon: '/images/channels/instagram.svg' },
+  { name: 'Messenger', icon: '/images/channels/messenger.svg' },
+  { name: 'Email', icon: '/images/channels/sms.svg' },
+  { name: 'Telegram', icon: '/images/channels/telegram.svg' },
+];

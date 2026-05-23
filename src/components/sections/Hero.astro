@@ -1,20 +1,5 @@
 ---
-// src/components/sections/Hero.astro
-import { siteConfig } from '../../data/site';
-
-const whatsappMessage = encodeURIComponent(
-  '¡Hola Kharma Solutions! Me interesa conocer más sobre sus servicios de desarrollo web.'
-);
-const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`;
-
-const channels = [
-  { name: 'WhatsApp', icon: '/images/channels/whatsapp.svg' },
-  { name: 'Google', icon: '/images/channels/google.svg' },
-  { name: 'Instagram', icon: '/images/channels/instagram.svg' },
-  { name: 'Messenger', icon: '/images/channels/messenger.svg' },
-  { name: 'Email', icon: '/images/channels/sms.svg' },
-  { name: 'Telegram', icon: '/images/channels/telegram.svg' },
-];
+import { siteConfig, whatsappLink, channels } from "../../data/site";
 ---
 
 <section id="inicio" class="hero">
@@ -45,23 +30,43 @@ const channels = [
       </p>
 
       <div class="hero__actions">
-        
-          <a href={whatsappLink}
+        <a
+          href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
           class="hero__btn hero__btn--primary"
           aria-label="Contactar por WhatsApp"
         >
-          <svg class="hero__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+          <svg
+            class="hero__btn-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+            ></path>
           </svg>
           Cotiza tu proyecto
         </a>
 
         <a href="#servicios" class="hero__btn hero__btn--secondary">
           Ver servicios
-          <svg class="hero__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" />
+          <svg
+            class="hero__btn-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6"></path>
           </svg>
         </a>
       </div>
@@ -93,20 +98,25 @@ const channels = [
 
         <!-- Órbita -->
         <div class="channels__orbit">
-          {channels.map((channel, i) => (
-            <div class="channels__item" style={`--i: ${i}; --total: ${channels.length}`}>
-              <div class="channels__icon">
-                <img
-                  src={channel.icon}
-                  alt={channel.name}
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                  decoding="async"
-                />
+          {
+            channels.map((channel, i) => (
+              <div
+                class="channels__item"
+                style={`--i: ${i}; --total: ${channels.length}`}
+              >
+                <div class="channels__icon">
+                  <img
+                    src={channel.icon}
+                    alt={channel.name}
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
 
         <!-- Núcleo central -->
@@ -152,8 +162,16 @@ const channels = [
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+      radial-gradient(
+        ellipse at 20% 50%,
+        rgba(59, 130, 246, 0.15) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 80% 50%,
+        rgba(139, 92, 246, 0.1) 0%,
+        transparent 60%
+      );
     z-index: 1;
   }
 
@@ -201,8 +219,13 @@ const channels = [
   }
 
   @keyframes badge-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
   }
 
   .hero__title {
@@ -390,7 +413,9 @@ const channels = [
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     animation: orbit-counter-rotate 80s linear infinite;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition:
+      transform 0.4s ease,
+      box-shadow 0.4s ease;
   }
 
   .channels__icon:hover {
@@ -445,27 +470,43 @@ const channels = [
 
   /* Animaciones del planetario */
   @keyframes orbit-rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes orbit-counter-rotate {
-    from { transform: translateX(-50%) rotate(0deg); }
-    to { transform: translateX(-50%) rotate(-360deg); }
+    from {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+      transform: translateX(-50%) rotate(-360deg);
+    }
   }
 
   @keyframes nucleus-glow {
     0% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 60px rgba(139, 92, 246, 0.2);
+      box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.4),
+        0 0 60px rgba(139, 92, 246, 0.2);
     }
     100% {
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(139, 92, 246, 0.3);
+      box-shadow:
+        0 0 40px rgba(59, 130, 246, 0.6),
+        0 0 80px rgba(139, 92, 246, 0.3);
     }
   }
 
   @keyframes ring-rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* ========================================
@@ -526,7 +567,7 @@ const channels = [
 
   .jello-diagonal-1 {
     -webkit-animation: jello-diagonal-1 0.8s both;
-            animation: jello-diagonal-1 0.8s both;
+    animation: jello-diagonal-1 0.8s both;
   }
 
   /* ----------------------------------------------
@@ -544,80 +585,79 @@ const channels = [
   @-webkit-keyframes jello-diagonal-1 {
     0% {
       -webkit-transform: skew(0deg 0deg);
-              transform: skew(0deg 0deg);
+      transform: skew(0deg 0deg);
     }
     30% {
       -webkit-transform: skew(25deg 25deg);
-              transform: skew(25deg 25deg);
+      transform: skew(25deg 25deg);
     }
     40% {
       -webkit-transform: skew(-15deg, -15deg);
-              transform: skew(-15deg, -15deg);
+      transform: skew(-15deg, -15deg);
     }
     50% {
       -webkit-transform: skew(15deg, 15deg);
-              transform: skew(15deg, 15deg);
+      transform: skew(15deg, 15deg);
     }
     65% {
       -webkit-transform: skew(-5deg, -5deg);
-              transform: skew(-5deg, -5deg);
+      transform: skew(-5deg, -5deg);
     }
     75% {
       -webkit-transform: skew(5deg, 5deg);
-              transform: skew(5deg, 5deg);
+      transform: skew(5deg, 5deg);
     }
     100% {
       -webkit-transform: skew(0deg 0deg);
-              transform: skew(0deg 0deg);
+      transform: skew(0deg 0deg);
     }
   }
   @keyframes jello-diagonal-1 {
     0% {
       -webkit-transform: skew(0deg 0deg);
-              transform: skew(0deg 0deg);
+      transform: skew(0deg 0deg);
     }
     30% {
       -webkit-transform: skew(25deg 25deg);
-              transform: skew(25deg 25deg);
+      transform: skew(25deg 25deg);
     }
     40% {
       -webkit-transform: skew(-15deg, -15deg);
-              transform: skew(-15deg, -15deg);
+      transform: skew(-15deg, -15deg);
     }
     50% {
       -webkit-transform: skew(15deg, 15deg);
-              transform: skew(15deg, 15deg);
+      transform: skew(15deg, 15deg);
     }
     65% {
       -webkit-transform: skew(-5deg, -5deg);
-              transform: skew(-5deg, -5deg);
+      transform: skew(-5deg, -5deg);
     }
     75% {
       -webkit-transform: skew(5deg, 5deg);
-              transform: skew(5deg, 5deg);
+      transform: skew(5deg, 5deg);
     }
     100% {
       -webkit-transform: skew(0deg 0deg);
-              transform: skew(0deg 0deg);
+      transform: skew(0deg 0deg);
     }
   }
-
 </style>
 
 <script>
   function initHeroParticles() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // No cargar en móviles para mejorar rendimiento
     if (window.innerWidth < 768) return;
 
     const loadParticles = async () => {
-      const { tsParticles } = await import('tsparticles-engine');
-      const { loadSlim } = await import('tsparticles-slim');
+      const { tsParticles } = await import("tsparticles-engine");
+      const { loadSlim } = await import("tsparticles-slim");
 
       await loadSlim(tsParticles);
 
-      await tsParticles.load('hero-particles', {
+      await tsParticles.load("hero-particles", {
         fullScreen: { enable: false },
         fpsLimit: 30,
         particles: {
@@ -626,7 +666,7 @@ const channels = [
             density: { enable: true, area: 1200 },
           },
           color: {
-            value: ['#3b82f6', '#8b5cf6'],
+            value: ["#3b82f6", "#8b5cf6"],
           },
           opacity: {
             value: { min: 0.1, max: 0.3 },
@@ -637,15 +677,15 @@ const channels = [
           links: {
             enable: true,
             distance: 120,
-            color: '#3b82f6',
+            color: "#3b82f6",
             opacity: 0.06,
             width: 1,
           },
           move: {
             enable: true,
             speed: 0.4,
-            direction: 'none',
-            outModes: { default: 'out' },
+            direction: "none",
+            outModes: { default: "out" },
           },
         },
         interactivity: {
@@ -658,10 +698,10 @@ const channels = [
     };
 
     // Esperar a que la página esté completamente cargada
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setTimeout(loadParticles, 1000);
     } else {
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         setTimeout(loadParticles, 1000);
       });
     }
