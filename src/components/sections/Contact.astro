@@ -262,16 +262,6 @@ import { contactChannels } from "../../data/contact";
             />
           </div>
 
-          <!-- reCAPTCHA -->
-          <div class="contact__recaptcha">
-            <div
-              class="g-recaptcha"
-              data-sitekey="6LelJFsrAAAAAKP1ju-0mHfeSXh1p38RSS5E4KNn"
-            >
-            </div>
-            <span class="contact__field-error" id="error-recaptcha"></span>
-          </div>
-
           <!-- Submit -->
           <button type="button" id="contact-submit" class="contact__submit">
             <span class="contact__submit-text">Enviar mensaje</span>
@@ -578,11 +568,6 @@ import { contactChannels } from "../../data/contact";
     min-height: 1rem;
   }
 
-  /* reCAPTCHA */
-  .contact__recaptcha {
-    margin-bottom: 1.25rem;
-  }
-
   /* Submit */
   .contact__submit {
     display: inline-flex;
@@ -705,66 +690,74 @@ import { contactChannels } from "../../data/contact";
 
 <script>
   import { initReveal } from "../../utils/reveal";
+
+  const EMAILJS_SERVICE_ID  = "service_f7f1dl3";
+  const EMAILJS_TEMPLATE_ID = "template_7y7se8f";
+  const EMAILJS_PUBLIC_KEY  = "vXKaY9x-tJwvz2FXX";
+
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
-    loadRecaptcha();
+    loadEmailJS();
   });
 
-  function loadRecaptcha() {
+  // Carga EmailJS de forma diferida cuando la sección entra al viewport
+  function loadEmailJS(): void {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const script = document.createElement("script");
-            script.src = "https://www.google.com/recaptcha/api.js";
-            script.async = true;
-            script.defer = true;
-            script.onload = () => initContactForm();
-            document.head.appendChild(script);
-            observer.disconnect();
-          }
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+
+          const script = document.createElement("script");
+          script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+          script.async = true;
+          script.defer = true;
+          script.onload = () => {
+            (window as any).emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+            initContactForm();
+          };
+          script.onerror = () => {
+            // El SDK no cargó; initContactForm igual para mantener UX,
+            // el error se mostrará al intentar enviar
+            initContactForm();
+          };
+          document.head.appendChild(script);
         });
       },
       { rootMargin: "200px" },
     );
 
-    const contactSection = document.getElementById("contacto");
-    if (contactSection) {
-      observer.observe(contactSection);
+    const section = document.getElementById("contacto");
+    if (section) {
+      observer.observe(section);
     } else {
       initContactForm();
     }
   }
 
-  function initContactForm() {
-    const submitBtn = document.getElementById(
-      "contact-submit",
-    ) as HTMLButtonElement;
-    const formContainer = document.getElementById("contact-form-container")!;
+  function initContactForm(): void {
+    const submitBtn   = document.getElementById("contact-submit")   as HTMLButtonElement;
     const successAlert = document.getElementById("form-success")!;
-    const errorAlert = document.getElementById("form-error")!;
-    const errorText = document.getElementById("form-error-text")!;
-    const charCount = document.getElementById("char-count")!;
-    const messageField = document.getElementById(
-      "contact-message",
-    ) as HTMLTextAreaElement;
+    const errorAlert   = document.getElementById("form-error")!;
+    const errorText    = document.getElementById("form-error-text")!;
+    const charCount    = document.getElementById("char-count")!;
+    const messageField = document.getElementById("contact-message") as HTMLTextAreaElement;
 
-    // Campos
     const fields = {
-      name: document.getElementById("contact-name") as HTMLInputElement,
-      email: document.getElementById("contact-email") as HTMLInputElement,
-      phone: document.getElementById("contact-phone") as HTMLInputElement,
+      name:    document.getElementById("contact-name")    as HTMLInputElement,
+      email:   document.getElementById("contact-email")   as HTMLInputElement,
+      phone:   document.getElementById("contact-phone")   as HTMLInputElement,
       subject: document.getElementById("contact-subject") as HTMLInputElement,
       message: messageField,
       website: document.getElementById("contact-website") as HTMLInputElement,
     };
 
-    // Contador de caracteres
+    // ── Contador de caracteres ────────────────────────────────────────────
     messageField.addEventListener("input", () => {
       charCount.textContent = String(messageField.value.length);
     });
 
-    // Formato de teléfono automático (555) 123-4567
+    // ── Formato de teléfono (555) 123-4567 ───────────────────────────────
     fields.phone.addEventListener("input", (e) => {
       const target = e.target as HTMLInputElement;
       let value = target.value.replace(/\D/g, "").slice(0, 10);
@@ -778,7 +771,7 @@ import { contactChannels } from "../../data/contact";
       target.value = value;
     });
 
-    // Limpiar errores al escribir
+    // ── Limpiar errores al escribir ───────────────────────────────────────
     Object.entries(fields).forEach(([key, field]) => {
       field.addEventListener("input", () => {
         clearFieldError(key);
@@ -786,11 +779,10 @@ import { contactChannels } from "../../data/contact";
       });
     });
 
-    // Validación frontend
+    // ── Validación ───────────────────────────────────────────────────────
     function validateForm(): boolean {
       let isValid = true;
 
-      // Name
       if (!fields.name.value.trim() || fields.name.value.trim().length < 3) {
         showFieldError("name", "Mínimo 3 caracteres");
         isValid = false;
@@ -799,164 +791,109 @@ import { contactChannels } from "../../data/contact";
         isValid = false;
       }
 
-      // Email
       if (!fields.email.value.trim()) {
         showFieldError("email", "El correo es requerido");
         isValid = false;
-      } else if (
-        !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(fields.email.value.trim())
-      ) {
+      } else if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(fields.email.value.trim())) {
         showFieldError("email", "Ingresa un correo válido");
         isValid = false;
       }
 
-      // Phone (optional, but validate format if filled)
-      if (
-        fields.phone.value &&
-        !/^\(\d{3}\) \d{3}-\d{4}$/.test(fields.phone.value)
-      ) {
+      if (fields.phone.value && !/^\(\d{3}\) \d{3}-\d{4}$/.test(fields.phone.value)) {
         showFieldError("phone", "Formato: (555) 123-4567");
         isValid = false;
       }
 
-      // Subject
-      if (
-        !fields.subject.value.trim() ||
-        fields.subject.value.trim().length < 3
-      ) {
+      if (!fields.subject.value.trim() || fields.subject.value.trim().length < 3) {
         showFieldError("subject", "Mínimo 3 caracteres");
         isValid = false;
       }
 
-      // Message
-      if (
-        !fields.message.value.trim() ||
-        fields.message.value.trim().length < 10
-      ) {
+      if (!fields.message.value.trim() || fields.message.value.trim().length < 10) {
         showFieldError("message", "Mínimo 10 caracteres");
-        isValid = false;
-      }
-
-      // reCAPTCHA
-      const recaptchaResponse = (window as any).grecaptcha?.getResponse?.();
-      if (!recaptchaResponse) {
-        showFieldError("recaptcha", "Completa el captcha");
         isValid = false;
       }
 
       return isValid;
     }
 
-    function showFieldError(field: string, message: string) {
+    function showFieldError(field: string, message: string): void {
       const errorEl = document.getElementById(`error-${field}`);
       if (errorEl) errorEl.textContent = message;
-      if (field in fields) {
-        (fields as any)[field]?.classList.add("has-error");
-      }
+      if (field in fields) (fields as any)[field]?.classList.add("has-error");
     }
 
-    function clearFieldError(field: string) {
+    function clearFieldError(field: string): void {
       const errorEl = document.getElementById(`error-${field}`);
       if (errorEl) errorEl.textContent = "";
     }
 
-    function clearAllErrors() {
-      ["name", "email", "phone", "subject", "message", "recaptcha"].forEach(
-        (f) => {
-          clearFieldError(f);
-          if (f in fields) (fields as any)[f]?.classList.remove("has-error");
-        },
-      );
+    function clearAllErrors(): void {
+      ["name", "email", "phone", "subject", "message"].forEach((f) => {
+        clearFieldError(f);
+        if (f in fields) (fields as any)[f]?.classList.remove("has-error");
+      });
     }
 
-    function setLoading(loading: boolean) {
+    function setLoading(loading: boolean): void {
       submitBtn.disabled = loading;
-      const textEl = submitBtn.querySelector(
-        ".contact__submit-text",
-      ) as HTMLElement;
-      const loadEl = submitBtn.querySelector(
-        ".contact__submit-loading",
-      ) as HTMLElement;
-      if (loading) {
-        textEl.hidden = true;
-        loadEl.hidden = false;
-      } else {
-        textEl.hidden = false;
-        loadEl.hidden = true;
-      }
+      const textEl = submitBtn.querySelector(".contact__submit-text")    as HTMLElement;
+      const loadEl = submitBtn.querySelector(".contact__submit-loading") as HTMLElement;
+      textEl.hidden = loading;
+      loadEl.hidden = !loading;
     }
 
-    // Submit
+    function clearForm(): void {
+      fields.name.value    = "";
+      fields.email.value   = "";
+      fields.phone.value   = "";
+      fields.subject.value = "";
+      fields.message.value = "";
+      charCount.textContent = "0";
+    }
+
+    // ── Submit ────────────────────────────────────────────────────────────
     submitBtn.addEventListener("click", async () => {
       clearAllErrors();
       successAlert.hidden = true;
-      errorAlert.hidden = true;
+      errorAlert.hidden   = true;
+
+      // Anti-spam: honeypot — si está relleno es un bot, ignorar silenciosamente
+      if (fields.website.value) return;
 
       if (!validateForm()) return;
 
+      const emailjsLib = (window as any).emailjs;
+      if (!emailjsLib) {
+        errorAlert.hidden = false;
+        errorText.textContent = "El servicio de envío aún no cargó. Espera un momento e intenta de nuevo.";
+        return;
+      }
+
       setLoading(true);
 
-      const recaptchaResponse =
-        (window as any).grecaptcha?.getResponse?.() || "";
-
-      const payload = {
-        name: fields.name.value.trim(),
-        email: fields.email.value.trim(),
-        phone: fields.phone.value || null,
-        subject: fields.subject.value.trim(),
-        message: fields.message.value.trim(),
-        website: fields.website.value, // Honeypot
-        "g-recaptcha-response": recaptchaResponse,
-      };
-
       try {
-        const response = await fetch(
-          "https://khs.kharmasolutions.com/api/lead",
+        await emailjsLib.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
           {
-            // const response = await fetch('http://localhost:8000/api/lead', {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(payload),
+            name:    fields.name.value.trim(),
+            subject: fields.subject.value.trim(),
+            email:   fields.email.value.trim(),
+            phone:   fields.phone.value || "",
+            message: fields.message.value.trim(),
           },
         );
 
-        const data = await response.json();
+        successAlert.hidden = false;
+        clearForm();
 
-        if (data.success) {
-          successAlert.hidden = false;
-
-          // Limpiar campos
-          fields.name.value = "";
-          fields.email.value = "";
-          fields.phone.value = "";
-          fields.subject.value = "";
-          fields.message.value = "";
-          charCount.textContent = "0";
-
-          setTimeout(() => {
-            successAlert.hidden = true;
-          }, 5000);
-        } else {
-          // Errores de validación del backend
-          if (data.error_validation) {
-            Object.entries(data.error_validation).forEach(([field, msg]) => {
-              showFieldError(field, msg as string);
-            });
-          } else {
-            errorAlert.hidden = false;
-            errorText.textContent = data.message || "Intenta nuevamente.";
-          }
-        }
+        setTimeout(() => { successAlert.hidden = true; }, 5000);
       } catch (err) {
         errorAlert.hidden = false;
-        errorText.textContent =
-          "Error de conexión. Verifica tu internet e intenta de nuevo.";
+        errorText.textContent = "Error al enviar el mensaje. Verifica tu conexión e intenta de nuevo.";
       } finally {
         setLoading(false);
-        (window as any).grecaptcha?.reset?.();
       }
     });
   }

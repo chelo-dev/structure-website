@@ -174,3 +174,83 @@ Para cada recomendación incluye:
 * Impacto SEO.
 * Impacto en Performance.
 * Ejemplos de implementación.
+
+Analiza y refactoriza el archivo:
+
+src/components/sections/Contact.astro
+
+Objetivo:
+Sustituir completamente la implementación actual de envío de formularios por EmailJS.
+
+Requisitos obligatorios:
+
+Mantener exactamente la misma interfaz visual:
+No modificar HTML innecesariamente.
+No modificar estilos existentes.
+No modificar clases CSS.
+No modificar la experiencia visual del usuario.
+Mantener la misma funcionalidad actual:
+Validaciones existentes.
+Estados de carga.
+Mensajes de éxito.
+Mensajes de error.
+Comportamiento del formulario.
+Reemplazar únicamente la lógica de integración de la API actual por EmailJS.
+Implementar EmailJS utilizando:
+
+Service ID:
+service_f7f1dl3
+
+Template ID:
+template_9j99ogs
+
+Public Key:
+vXKaY9x-tJwvz2FXX
+
+Mapear los campos del formulario a las variables del template:
+
+{{nombre}} -> nombre
+{{asunto}} -> asunto
+{{email}} -> email
+{{phone}} -> phone
+
+Donde:
+
+nombre es obligatorio
+asunto es obligatorio
+email es obligatorio
+phone es opcional
+La llamada debe utilizar la siguiente estructura:
+
+emailjs.send(
+"service_f7f1dl3",
+"template_9j99ogs",
+{
+name: nombre,
+subject: asunto,
+email: email,
+phone: telefono
+}
+);
+
+Aplicar buenas prácticas:
+Manejo de errores con try/catch.
+Deshabilitar el botón durante el envío.
+Evitar múltiples envíos simultáneos.
+Limpiar el formulario después de un envío exitoso.
+Mostrar errores amigables al usuario.
+Tipado correcto en TypeScript.
+No utilizar librerías adicionales distintas a EmailJS.
+No exponer información sensible en el cliente.
+Explicar detalladamente:
+Qué cambios realizaste.
+Qué código eliminaste.
+Qué código agregaste.
+Posibles mejoras futuras.
+
+Entrega:
+
+Código completo refactorizado.
+Explicación paso a paso.
+Justificación técnica de cada cambio.
+
