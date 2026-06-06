@@ -333,6 +333,20 @@ import { services } from '../../data/services';
   /* ========================================
      Responsive
      ======================================== */
+  /* filter:blur(100px) con animación en móvil fuerza repintado del compositor en cada frame.
+     Se elimina completamente en breakpoints pequeños sin impacto visual significativo. */
+  @media (max-width: 767px) {
+    .services__bg-blur {
+      display: none;
+    }
+
+    /* backdrop-filter en 4 cards simultáneas crea 4 capas de composición en móvil */
+    .service-card__inner {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
   @media (min-width: 640px) {
     .services__grid {
       grid-template-columns: repeat(2, 1fr);
@@ -358,7 +372,3 @@ import { services } from '../../data/services';
   }
 </style>
 
-<script>
-  import { initReveal } from '../../utils/reveal';
-  document.addEventListener('DOMContentLoaded', initReveal);
-</script>

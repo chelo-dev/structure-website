@@ -1,4 +1,9 @@
+let _initialized = false;
+
 export function initReveal() {
+  if (_initialized) return;
+  _initialized = true;
+
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;

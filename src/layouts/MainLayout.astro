@@ -23,7 +23,6 @@ const { title, description, noindex = false } = Astro.props;
   </head>
   <body>
     <script>
-      // Marca el HTML como JS habilitado inmediatamente
       document.documentElement.classList.add('js-loaded');
     </script>
     <Header />
@@ -32,5 +31,15 @@ const { title, description, noindex = false } = Astro.props;
     </main>
     <Footer />
     <WhatsAppButton />
+    <script>
+      import { initReveal } from '../utils/reveal';
+      // Los scripts de módulo son diferidos; el DOM ya está listo pero DOMContentLoaded
+      // puede haber disparado antes de que este módulo ejecute.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveal);
+      } else {
+        initReveal();
+      }
+    </script>
   </body>
 </html>

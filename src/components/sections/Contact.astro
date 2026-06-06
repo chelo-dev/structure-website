@@ -689,16 +689,15 @@ import { contactChannels } from "../../data/contact";
 </style>
 
 <script>
-  import { initReveal } from "../../utils/reveal";
-
   const EMAILJS_SERVICE_ID  = "service_f7f1dl3";
   const EMAILJS_TEMPLATE_ID = "template_7y7se8f";
   const EMAILJS_PUBLIC_KEY  = "vXKaY9x-tJwvz2FXX";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    initReveal();
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", loadEmailJS);
+  } else {
     loadEmailJS();
-  });
+  }
 
   // Carga EmailJS de forma diferida cuando la sección entra al viewport
   function loadEmailJS(): void {

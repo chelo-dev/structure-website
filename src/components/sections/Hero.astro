@@ -529,6 +529,27 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
     }
   }
 
+  /* En móvil la órbita contiene 6× backdrop-filter:blur(8px) + 4 animaciones CSS continuas.
+     Con display:none el navegador elimina esos layers del árbol de composición completamente. */
+  @media (max-width: 767px) {
+    .hero__orbit-wrapper {
+      display: none;
+    }
+
+    /* El botón secundario usa backdrop-filter — se sustituye por fondo sólido en móvil */
+    .hero__btn--secondary {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* La animación del badge-dot puede diferirse; no afecta LCP pero sí al main thread */
+    .hero__badge-dot {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero {
       padding: 5rem 0 3rem;
@@ -556,12 +577,6 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
       flex-direction: row;
       align-items: center;
       gap: 0.5rem;
-    }
-
-    .hero__orbit-wrapper {
-      right: -40%;
-      opacity: 0.25;
-      pointer-events: none;
     }
   }
 
