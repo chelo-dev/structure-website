@@ -9,10 +9,12 @@ import { siteConfig } from '../../data/site';
       <!-- Logo -->
        <a href="/#inicio" class="header__logo" aria-label={`${siteConfig.name} - Inicio`}>
         <img
-          src="/favicon.svg"
+          src="/logo.webp"
           alt={`${siteConfig.name} logo`}
           width="144"
           height="50"
+          fetchpriority="high"
+          decoding="async"
           class="header__logo-img"
         />
       </a>
