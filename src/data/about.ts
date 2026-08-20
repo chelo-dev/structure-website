@@ -6,51 +6,27 @@ export interface About {
 
 export const about: About[] = [
     {
-        icon: 'quality',
-        title: 'Atención personalizada',
+        icon: 'check',
+        title: 'Contacto directo conmigo',
         description:
-            'Cada proyecto recibe dedicación total. Trabajamos de cerca contigo para entender tu visión y convertirla en realidad.',
-    },
-    {
-        icon: 'rocket',
-        title: 'Entrega en tiempo récord',
-        description:
-            'Los tiempos de entrega son nuestra fortaleza. Tu sitio web estará listo cuando lo necesites, sin sacrificar calidad.',
+            'No necesitas pasar por vendedores, intermediarios o departamentos de atención. Estoy directamente involucrado en tu proyecto.',
     },
     {
         icon: 'design',
-        title: 'Diseños únicos',
+        title: 'Desarrollo personalizado',
         description:
-            'Nada de plantillas genéricas. Cada proyecto se diseña desde cero para reflejar la identidad de tu marca.',
+            'No se trata únicamente de elegir una plantilla y cambiar colores. Desarrollo la solución de acuerdo con las necesidades de cada proyecto.',
     },
     {
         icon: 'code',
-        title: 'Tu proyecto, tu código',
+        title: 'Código que puedes conservar',
         description:
-            'Al finalizar, recibes el código fuente completo de tu sitio. Tú pagaste por él, es totalmente tuyo.',
+            'El proyecto es tuyo. Al finalizar, recibes el código fuente correspondiente al desarrollo contratado.',
     },
     {
         icon: 'shield',
-        title: '1 año gratis de hosting + dominio',
+        title: 'Acompañamiento',
         description:
-            'Incluimos un año de hosting + dominio gratis. Pasando el año tiene tiene un costo el cual puede variar.',
+            'No desaparezco después de entregar el sitio. Puedo ayudarte con mantenimiento, actualizaciones y nuevas funcionalidades.',
     },
-    {
-        icon: 'check',
-        title: 'Sin preocupaciones',
-        description:
-            'Nos encargamos de todo: dominio, hosting, configuración y puesta en línea. Tú solo enfócate en tu negocio.',
-    },
-];
-
-export interface Stats {
-    number: string,
-    label: string
-}
-
-export const stats: Stats[] = [
-    { number: '4+', label: 'Años de experiencia' },
-    { number: '40+', label: 'Proyectos entregados' },
-    { number: '3', label: 'Revisiones sin costo' },
-    { number: '1 año', label: 'Hosting + dominio gratis' },
 ];

@@ -1,0 +1,549 @@
+---
+// src/pages/planes/[slug].astro
+import type { GetStaticPaths } from 'astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import { plans, type Plan } from '../../data/plans';
+import { siteConfig } from '../../data/site';
+
+export const getStaticPaths = (() => {
+  return plans.map((plan) => ({
+    params: { slug: plan.slug },
+    props: { plan },
+  }));
+}) satisfies GetStaticPaths;
+
+const { plan } = Astro.props as { plan: Plan };
+
+const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${encodeURIComponent(plan.whatsappMessage)}`;
+const otherPlans = plans.filter((p) => p.slug !== plan.slug);
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: plan.name,
+  description: plan.longDescription,
+  brand: {
+    '@type': 'Brand',
+    name: siteConfig.name,
+  },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: plan.currency,
+    price: plan.price.replace(/,/g, ''),
+    availability: 'https://schema.org/InStock',
+    url: `${siteConfig.url}/planes/${plan.slug}`,
+  },
+};
+---
+
+<MainLayout
+  title={`${plan.name} — Desde $${plan.price} MXN`}
+  description={plan.longDescription}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+  <section class="plan-detail">
+    <div class="plan-detail__container">
+      <!-- Back link -->
+      <a href="/#planes" class="plan-detail__back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5" />
+          <path d="M12 19l-7-7 7-7" />
+        </svg>
+        Volver a planes
+      </a>
+
+      <!-- Hero -->
+      <div class="plan-detail__hero" data-reveal="up">
+        {plan.popular && <div class="plan-detail__badge">Más elegido</div>}
+        <span class="plan-detail__label">Plan</span>
+        <h1 class="plan-detail__title">{plan.name}</h1>
+        <p class="plan-detail__description">{plan.longDescription}</p>
+
+        <div class="plan-detail__pricing">
+          {plan.priceFrom && <span class="plan-detail__price-from">Desde</span>}
+          <span class="plan-detail__price-symbol">$</span>
+          <span class="plan-detail__price">{plan.price}</span>
+          <span class="plan-detail__currency">{plan.currency}</span>
+        </div>
+        <p class="plan-detail__price-badge">Pago único · Sin mensualidades</p>
+        <p class="plan-detail__meta">
+          <span><strong>Entrega:</strong> {plan.deliveryTime}</span>
+          <span aria-hidden="true">·</span>
+          <span><strong>Revisiones:</strong> {plan.revisions}</span>
+        </p>
+
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="plan-detail__cta"
+          aria-label={`Contratar ${plan.name} por WhatsApp`}
+        >
+          <svg class="plan-detail__cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 004.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.5.05-1 .25-3.3-.69-2.8-1.15-4.6-3.99-4.74-4.17-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.02.97-2.3.24-.26.53-.32.71-.32h.5c.16 0 .38-.03.58.44.24.57.8 1.98.87 2.12.07.14.11.31.02.5-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.55.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.27.14.44.2.51.32.07.11.07.68-.17 1.36z" />
+          </svg>
+          Solicitar {plan.name} por WhatsApp
+        </a>
+      </div>
+
+      <!-- Features -->
+      <div class="plan-detail__section" data-reveal="up">
+        <h2 class="plan-detail__section-title">¿Qué incluye?</h2>
+        <ul class="plan-detail__features">
+          {plan.features.map((feature) => (
+            <li class="plan-detail__feature">
+              <svg
+                class="plan-detail__check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Administración -->
+      <div class="plan-detail__section" data-reveal="up">
+        <h2 class="plan-detail__section-title">Cómo funciona la administración</h2>
+        <ul class="plan-detail__admin">
+          {plan.adminInfo.map((info) => (
+            <li class="plan-detail__admin-item">{info}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- No incluye -->
+      <div class="plan-detail__note" data-reveal="up">
+        <svg class="plan-detail__note-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        <p><strong>No incluye:</strong> {plan.notIncluded}</p>
+      </div>
+
+      <!-- CTA final -->
+      <div class="plan-detail__final-cta" data-reveal="up">
+        <p class="plan-detail__final-text">
+          ¿Este plan es para ti? Escríbeme y armamos tu proyecto.
+        </p>
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="plan-detail__cta"
+          aria-label={`Contratar ${plan.name} por WhatsApp`}
+        >
+          <svg class="plan-detail__cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 004.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.5.05-1 .25-3.3-.69-2.8-1.15-4.6-3.99-4.74-4.17-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.02.97-2.3.24-.26.53-.32.71-.32h.5c.16 0 .38-.03.58.44.24.57.8 1.98.87 2.12.07.14.11.31.02.5-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.55.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.27.14.44.2.51.32.07.11.07.68-.17 1.36z" />
+          </svg>
+          Solicitar {plan.name} por WhatsApp
+        </a>
+      </div>
+
+      <!-- Otros planes -->
+      <div class="plan-detail__others" data-reveal="up">
+        <h2 class="plan-detail__section-title">Otros planes</h2>
+        <div class="plan-detail__others-grid">
+          {otherPlans.map((other) => (
+            <a href={`/planes/${other.slug}`} class="plan-detail__other-card">
+              <span class="plan-detail__other-name">{other.name}</span>
+              <span class="plan-detail__other-price">Desde ${other.price} {other.currency}</span>
+              <svg class="plan-detail__other-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* ========================================
+     Plan Detail
+     ======================================== */
+  .plan-detail {
+    position: relative;
+    padding: 3rem 0 var(--space-section);
+    background: var(--surface);
+  }
+
+  .plan-detail__container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* Back link */
+  .plan-detail__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent-text);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  .plan-detail__back svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .plan-detail__back:hover {
+    color: var(--accent-strong);
+    transform: translateX(-4px);
+  }
+
+  /* Hero */
+  .plan-detail__hero {
+    position: relative;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    border: 1px solid var(--border);
+  }
+
+  .plan-detail__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.375rem 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy-900);
+    background: var(--accent-on-dark);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+  }
+
+  .plan-detail__label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .plan-detail__title {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--navy-900);
+    margin-bottom: 1rem;
+    letter-spacing: var(--tracking-tighter);
+  }
+
+  .plan-detail__description {
+    max-width: 520px;
+    margin: 0 auto 1.75rem;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .plan-detail__pricing {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.125rem;
+  }
+
+  .plan-detail__price-symbol {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-400);
+    align-self: flex-start;
+    margin-top: 0.625rem;
+  }
+
+  .plan-detail__price {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tighter);
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .plan-detail__currency {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--gray-400);
+    margin-left: 0.25rem;
+  }
+
+  .plan-detail__price-from {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--gray-400);
+    align-self: center;
+    margin-right: 0.125rem;
+  }
+
+  .plan-detail__price-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0.75rem 0 1rem;
+    padding: 0.3125rem 0.875rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-soft-border);
+    border-radius: var(--radius-full);
+  }
+
+  .plan-detail__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--gray-400);
+    margin-bottom: 2rem;
+  }
+
+  .plan-detail__meta strong {
+    color: var(--gray-700);
+    font-weight: 600;
+  }
+
+  /* CTA button (WhatsApp) */
+  .plan-detail__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.9375rem 2rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--accent-text);
+    border-radius: var(--radius-full);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-base);
+  }
+
+  .plan-detail__cta:hover {
+    background: var(--accent-strong);
+  }
+
+  .plan-detail__cta-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  /* Sections */
+  .plan-detail__section {
+    margin-bottom: 2.5rem;
+  }
+
+  .plan-detail__section-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--navy-900);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Features */
+  .plan-detail__features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .plan-detail__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .plan-detail__check {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--accent-text);
+    margin-top: 2px;
+  }
+
+  /* Admin info */
+  .plan-detail__admin {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .plan-detail__admin-item {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .plan-detail__admin-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* No incluye */
+  .plan-detail__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: var(--radius-lg);
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid var(--border);
+  }
+
+  .plan-detail__note-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--gray-400);
+  }
+
+  .plan-detail__note p {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .plan-detail__note strong {
+    color: var(--gray-700);
+  }
+
+  /* Final CTA */
+  .plan-detail__final-cta {
+    text-align: center;
+    padding: 2.5rem;
+    margin-bottom: 3.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .plan-detail__final-text {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Otros planes */
+  .plan-detail__others-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+
+  .plan-detail__other-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.125rem 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .plan-detail__other-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-soft-border);
+  }
+
+  .plan-detail__other-name {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .plan-detail__other-price {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .plan-detail__other-arrow {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-text);
+    flex-shrink: 0;
+  }
+
+  /* ========================================
+     Responsive
+     ======================================== */
+  @media (min-width: 640px) {
+    .plan-detail__features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .plan-detail__others-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .plan-detail {
+      padding: 4rem 0 7rem;
+    }
+
+    .plan-detail__hero {
+      padding: 3.5rem 3rem;
+    }
+  }
+</style>

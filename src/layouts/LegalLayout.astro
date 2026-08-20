@@ -19,6 +19,7 @@ const { title, description, noindex = false } = Astro.props;
     <SEOHead title={title} description={description} noindex={noindex} />
   </head>
   <body>
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido</a>
     <Header />
     <main id="contenido-principal" class="legal-page">
       <article class="legal-container">
@@ -34,7 +35,7 @@ const { title, description, noindex = false } = Astro.props;
      ======================================== */
   .legal-page {
     padding: 4rem 0;
-    background: var(--color-bg);
+    background: var(--surface);
     min-height: calc(100vh - var(--header-height));
   }
 
@@ -47,23 +48,23 @@ const { title, description, noindex = false } = Astro.props;
   .legal-container h1 {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     font-weight: 800;
-    color: var(--color-gray-900);
+    color: var(--navy-900);
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
   }
 
   .legal-updated {
     font-size: 0.8125rem;
-    color: var(--color-gray-400);
+    color: var(--gray-400);
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--color-gray-100);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .legal-container h2 {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--color-gray-800);
+    color: var(--text-strong);
     margin-top: 2rem;
     margin-bottom: 0.625rem;
   }
@@ -71,26 +72,26 @@ const { title, description, noindex = false } = Astro.props;
   .legal-container p {
     font-size: 0.9375rem;
     line-height: 1.75;
-    color: var(--color-gray-600);
+    color: var(--text);
     margin-bottom: 1rem;
   }
 
   .legal-container a {
-    color: var(--color-primary);
+    color: var(--accent-text);
     text-decoration: none;
     font-weight: 500;
     transition: color var(--transition-fast);
   }
 
   .legal-container a:hover {
-    color: var(--color-primary-dark);
+    color: var(--accent-strong);
     text-decoration: underline;
   }
 
   .legal-back {
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--color-gray-100);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .legal-back a {
@@ -99,13 +100,13 @@ const { title, description, noindex = false } = Astro.props;
     gap: 0.25rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--accent-text);
     text-decoration: none;
     transition: transform var(--transition-fast), color var(--transition-fast);
   }
 
   .legal-back a:hover {
-    color: var(--color-primary-dark);
+    color: var(--accent-strong);
     transform: translateX(-4px);
     text-decoration: none;
   }

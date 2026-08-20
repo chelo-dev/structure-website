@@ -1,187 +1,118 @@
 ---
 import { plans } from '../../data/plans';
-import { siteConfig } from '../../data/site';
 ---
 
-<section id="planes" class="plans">
-  <div class="plans__container">
-    <!-- Header -->
-    <div class="plans__header" data-reveal>
-      <span class="plans__label">Planes y precios</span>
-      <h2 class="plans__title">
-        Elige el plan perfecto
-        <span class="plans__title-gradient">para tu negocio</span>
+<section id="planes" class="section section--sunken plans">
+  <div class="container">
+    <div class="plans__header">
+      <span class="eyebrow" data-reveal="fade">Precios</span>
+      <h2 class="section-title plans__title" data-reveal="up">
+        Opciones para comenzar
       </h2>
-      <p class="plans__subtitle">
-        Soluciones completas llave en mano. Todos los planes incluyen diseño
-        personalizado, dominio, hosting y soporte — sin costos ocultos.
+      <p class="section-lead" data-reveal="up">
+        Cada proyecto tiene necesidades diferentes. Estos paquetes sirven como
+        punto de partida; si necesitas funcionalidades adicionales, puedo
+        preparar una propuesta personalizada.
       </p>
     </div>
 
-    <!-- Cards -->
-    <div class="plans__grid">
-      {plans.map((plan, index) => {
-        const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${encodeURIComponent(plan.whatsappMessage)}`;
+    <div class="plans__grid" data-reveal-stagger="100">
+      {plans.map((plan) => (
+        <article
+          class:list={['plan', { 'plan--featured': plan.popular }]}
+          data-reveal="up"
+        >
+          {plan.popular && <span class="plan__badge">Más elegido</span>}
 
-        return (
-          <article
-            class:list={['plan-card', { 'plan-card--popular': plan.popular }]}
-            data-reveal
-            data-reveal-delay={index * 150}
+          <header class="plan__header">
+            <h3 class="plan__name">{plan.name}</h3>
+            <p class="plan__description">{plan.description}</p>
+          </header>
+
+          <p class="plan__pricing">
+            {plan.priceFrom && <span class="plan__from">Desde</span>}
+            <span class="plan__currency">$</span>
+            <span class="plan__price">{plan.price}</span>
+            <span class="plan__unit">{plan.currency}</span>
+          </p>
+          <p class="plan__badge-payment">Pago único · Sin mensualidades</p>
+          <p class="plan__meta">
+            <span><strong>Entrega:</strong> {plan.deliveryTime}</span>
+            <span><strong>Revisiones:</strong> {plan.revisions}</span>
+          </p>
+
+          <ul class="plan__features" role="list">
+            {plan.features.map((feature) => (
+              <li class="plan__feature">
+                <svg
+                  class="plan__check"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={`/planes/${plan.slug}`}
+            class:list={[
+              'btn',
+              'plan__cta',
+              plan.popular ? 'btn--primary' : 'btn--secondary',
+            ]}
+            aria-label={`Ver detalles de ${plan.name}`}
           >
-            {/* Badge popular */}
-            {plan.popular && (
-              <div class="plan-card__badge">Más elegido</div>
-            )}
-
-            {/* Header */}
-            <div class="plan-card__header">
-              <h3 class="plan-card__name">{plan.name}</h3>
-              <p class="plan-card__description">{plan.description}</p>
-            </div>
-
-            {/* Precio */}
-            <div class="plan-card__pricing">
-              <span class="plan-card__price-symbol">$</span>
-              <span class="plan-card__price">{plan.price}</span>
-              <span class="plan-card__currency">{plan.currency}</span>
-            </div>
-
-            <p class="plan-card__price-note">Pago único · Sin mensualidades</p>
-
-            {/* Divider */}
-            <div class="plan-card__divider" aria-hidden="true" />
-
-            {/* Features */}
-            <ul class="plan-card__features">
-              {plan.features.map((feature) => (
-                <li class="plan-card__feature">
-                  <svg
-                    class="plan-card__check"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class:list={[
-                'plan-card__btn',
-                { 'plan-card__btn--primary': plan.popular },
-                { 'plan-card__btn--secondary': !plan.popular },
-              ]}
-              aria-label={`Contratar ${plan.name}`}
+            {plan.cta}
+            <svg
+              class="plan__cta-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
             >
-              {plan.cta}
-              <svg
-                class="plan-card__btn-arrow"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </article>
-        );
-      })}
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </article>
+      ))}
     </div>
 
-    {/* Garantía */}
-    <div class="plans__guarantee" data-reveal>
-      <div class="plans__guarantee-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <aside class="plans__note-card" data-reveal="fade">
+      <span class="plans__note-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <polyline points="9 12 11 14 15 10" />
         </svg>
-      </div>
-      <div class="plans__guarantee-content">
-        <p class="plans__guarantee-title">Todos los planes incluyen</p>
-        <p class="plans__guarantee-text">
-          Código fuente entregado al 100% · Diseño único sin plantillas ·
-          Revisiones sin costo · Nos encargamos de toda la logística para poner
-          tu sitio en línea.
-        </p>
-      </div>
-    </div>
+      </span>
+      <p class="plans__note-text">
+        <strong>Todos los planes incluyen</strong> código fuente entregado al
+        100%, diseño único sin plantillas, revisiones sin costo dentro del
+        tiempo de entrega y la configuración necesaria para dejar tu sitio en
+        línea. Modificaciones fuera de ese plazo se cotizan por hora.
+      </p>
+    </aside>
   </div>
 </section>
 
 <style>
-  /* ========================================
-     Plans Section
-     ======================================== */
-  .plans {
-    position: relative;
-    padding: 6rem 0;
-    background: var(--color-bg-alt);
-    overflow: hidden;
-  }
-
-  .plans__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-  }
-
-  /* ========================================
-     Header
-     ======================================== */
   .plans__header {
-    max-width: 640px;
-    margin: 0 auto 3.5rem;
-    text-align: center;
-  }
-
-  .plans__label {
-    display: inline-block;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-  }
-
-  .plans__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--color-gray-900);
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
-  }
-
-  .plans__title-gradient {
-    display: block;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .plans__subtitle {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-gray-500);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 44rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
 
   /* ========================================
@@ -190,269 +121,292 @@ import { siteConfig } from '../../data/site';
   .plans__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
     align-items: start;
-    max-width: 1000px;
-    margin: 0 auto 3rem;
+    margin-bottom: 2.5rem;
   }
 
   /* ========================================
-     Plan Card
+     Tarjeta de plan
      ======================================== */
-  .plan-card {
+  .plan {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    height: 100%;
+    padding: 2rem 1.75rem;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-200);
     transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base);
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
   }
 
-  .plan-card:hover {
-    transform: translateY(-4px);
+  .plan:hover {
+    border-color: var(--border-strong);
     box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
   }
 
-  /* Card popular */
-  .plan-card--popular {
-    border: 2px solid transparent;
-    background-image:
-      linear-gradient(var(--color-white), var(--color-white)),
-      var(--gradient-primary);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+  /* Plan destacado: navy sólido, contraste real */
+  .plan--featured {
+    background: var(--surface-inverse);
+    border-color: var(--navy-700);
+    box-shadow: var(--shadow-xl);
   }
 
-  .plan-card--popular:hover {
-    box-shadow: 0 12px 48px rgba(59, 130, 246, 0.25);
+  .plan--featured:hover {
+    border-color: var(--accent);
   }
 
-  /* Badge */
-  .plan-card__badge {
+  .plan__badge {
     position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.375rem 1.25rem;
-    font-size: 0.75rem;
+    top: 0;
+    left: 1.75rem;
+    transform: translateY(-50%);
+    padding: 0.375rem 0.875rem;
+    font-size: var(--text-xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-white);
-    background: var(--gradient-primary);
+    color: var(--navy-900);
+    background: var(--accent-on-dark);
     border-radius: var(--radius-full);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
     white-space: nowrap;
   }
 
-  /* Header */
-  .plan-card__header {
-    margin-bottom: 1.25rem;
+  /* ----- Encabezado ----- */
+  .plan__header {
+    margin-bottom: 1.5rem;
   }
 
-  .plan-card--popular .plan-card__header {
-    margin-top: 0.5rem;
-  }
-
-  .plan-card__name {
-    font-size: 1.25rem;
+  .plan__name {
+    font-size: var(--text-xl);
     font-weight: 700;
-    color: var(--color-gray-900);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-strong);
     margin-bottom: 0.5rem;
   }
 
-  .plan-card__description {
-    font-size: 0.8125rem;
-    line-height: 1.6;
-    color: var(--color-gray-500);
+  .plan--featured .plan__name {
+    color: var(--text-inverse);
   }
 
-  /* Pricing */
-  .plan-card__pricing {
+  .plan__description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .plan--featured .plan__description {
+    color: var(--text-inverse-muted);
+  }
+
+  /* ----- Precio ----- */
+  .plan__pricing {
     display: flex;
     align-items: baseline;
-    gap: 0.125rem;
-    margin-bottom: 0.25rem;
+    gap: 0.1875rem;
   }
 
-  .plan-card__price-symbol {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-gray-400);
-    align-self: flex-start;
-    margin-top: 0.5rem;
-  }
-
-  .plan-card__price {
-    font-size: clamp(2.25rem, 5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-  }
-
-  .plan-card__currency {
-    font-size: 0.9375rem;
+  .plan__currency {
+    font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--color-gray-400);
+    color: var(--text-muted);
+    align-self: flex-start;
+    padding-top: 0.4rem;
+  }
+
+  .plan--featured .plan__currency {
+    color: var(--text-inverse-muted);
+  }
+
+  .plan__price {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: var(--tracking-tighter);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-strong);
+  }
+
+  .plan--featured .plan__price {
+    color: var(--accent-on-dark);
+  }
+
+  .plan__unit {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-muted);
     margin-left: 0.25rem;
   }
 
-  .plan-card__price-note {
-    font-size: 0.75rem;
-    color: var(--color-gray-400);
-    margin-bottom: 1.25rem;
+  .plan--featured .plan__unit {
+    color: var(--text-inverse-muted);
   }
 
-  /* Divider */
-  .plan-card__divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-gray-200), transparent);
-    margin-bottom: 1.25rem;
+  .plan__from {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    align-self: center;
+    margin-right: 0.125rem;
   }
 
-  .plan-card--popular .plan-card__divider {
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+  .plan--featured .plan__from {
+    color: var(--text-inverse-muted);
   }
 
-  /* Features */
-  .plan-card__features {
+  .plan__badge-payment {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    margin: 0.625rem 0 0.875rem;
+    padding: 0.3125rem 0.75rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-soft-border);
+    border-radius: var(--radius-full);
+  }
+
+  .plan--featured .plan__badge-payment {
+    color: var(--accent-on-dark);
+    background: rgba(89, 196, 226, 0.14);
+    border-color: rgba(89, 196, 226, 0.3);
+  }
+
+  .plan__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .plan__meta strong {
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  .plan--featured .plan__meta {
+    color: var(--text-inverse-muted);
+    border-bottom-color: var(--border-inverse);
+  }
+
+  .plan--featured .plan__meta strong {
+    color: var(--text-inverse);
+  }
+
+  /* ----- Características ----- */
+  .plan__features {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    margin-bottom: 1.75rem;
+    gap: 0.75rem;
     flex-grow: 1;
+    margin-bottom: 2rem;
   }
 
-  .plan-card__feature {
+  .plan__feature {
     display: flex;
     align-items: flex-start;
     gap: 0.625rem;
-    font-size: 0.8375rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
-    color: var(--color-gray-600);
+    color: var(--text-muted);
   }
 
-  .plan-card__check {
-    width: 18px;
-    height: 18px;
+  .plan--featured .plan__feature {
+    color: var(--text-inverse-muted);
+  }
+
+  .plan__check {
     flex-shrink: 0;
-    color: var(--color-primary);
-    margin-top: 1px;
+    width: 17px;
+    height: 17px;
+    margin-top: 0.15em;
+    color: var(--accent-text);
   }
 
-  .plan-card--popular .plan-card__check {
-    color: var(--color-primary);
+  .plan--featured .plan__check {
+    color: var(--accent-on-dark);
   }
 
-  /* CTA Button */
-  .plan-card__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+  /* ----- CTA ----- */
+  .plan__cta {
     width: 100%;
-    padding: 0.875rem 1.5rem;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: var(--radius-full);
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base),
-      background var(--transition-base);
   }
 
-  .plan-card__btn:hover {
-    transform: translateY(-2px);
+  /* En la tarjeta destacada el secundario se invierte */
+  .plan--featured .btn--primary {
+    color: var(--navy-900);
+    background: var(--accent-on-dark);
   }
 
-  .plan-card__btn-arrow {
-    width: 18px;
-    height: 18px;
-    transition: transform var(--transition-fast);
+  .plan--featured .btn--primary:hover {
+    background: var(--cyan-300);
   }
 
-  .plan-card__btn:hover .plan-card__btn-arrow {
+  .plan__cta-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-base);
+  }
+
+  .plan__cta:hover .plan__cta-icon {
     transform: translateX(4px);
   }
 
-  /* Primary button */
-  .plan-card__btn--primary {
-    color: var(--color-white);
-    background: var(--gradient-primary);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
-  }
-
-  .plan-card__btn--primary:hover {
-    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
-  }
-
-  /* Secondary button */
-  .plan-card__btn--secondary {
-    color: var(--color-primary);
-    background: rgba(59, 130, 246, 0.06);
-    border: 1.5px solid rgba(59, 130, 246, 0.2);
-  }
-
-  .plan-card__btn--secondary:hover {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.35);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
-  }
-
   /* ========================================
-     Guarantee
+     Nota inferior
      ======================================== */
-  .plans__guarantee {
+  .plans__note-card {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 1.5rem 2rem;
+    max-width: 46rem;
+    padding: 1.5rem;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-100);
   }
 
-  .plans__guarantee-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .plans__note-icon {
     flex-shrink: 0;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-    color: var(--color-primary);
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    color: var(--accent-text);
+    background: var(--accent-soft);
   }
 
-  .plans__guarantee-icon svg {
-    width: 20px;
-    height: 20px;
+  .plans__note-icon svg {
+    width: 19px;
+    height: 19px;
   }
 
-  .plans__guarantee-title {
-    font-size: 0.9375rem;
+  .plans__note-text {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .plans__note-text strong {
+    color: var(--text-strong);
     font-weight: 700;
-    color: var(--color-gray-800);
-    margin-bottom: 0.25rem;
-  }
-
-  .plans__guarantee-text {
-    font-size: 0.8125rem;
-    line-height: 1.65;
-    color: var(--color-gray-500);
   }
 
   /* ========================================
@@ -463,50 +417,23 @@ import { siteConfig } from '../../data/site';
       grid-template-columns: repeat(2, 1fr);
     }
 
-    /* La card popular ocupa todo el ancho en 2 cols */
-    .plan-card--popular {
+    .plan--featured {
       grid-column: 1 / -1;
-      max-width: 420px;
+      max-width: 26rem;
       justify-self: center;
       width: 100%;
     }
   }
 
-  @media (min-width: 768px) {
-    .plans {
-      padding: 7rem 0;
-    }
-  }
-
-  @media (min-width: 960px) {
+  @media (min-width: 1000px) {
     .plans__grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
 
-    /* En 3 cols la popular no necesita span */
-    .plan-card--popular {
+    .plan--featured {
       grid-column: auto;
       max-width: none;
-      transform: scale(1.04);
-    }
-
-    .plan-card--popular:hover {
-      transform: scale(1.04) translateY(-4px);
-    }
-  }
-
-  @media (max-width: 639px) {
-    .plan-card {
-      padding: 1.75rem;
-    }
-
-    .plans__guarantee {
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-      padding: 1.25rem 1.5rem;
     }
   }
 </style>
-

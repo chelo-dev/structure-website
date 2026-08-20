@@ -11,13 +11,6 @@ export default defineConfig({
   vite: {
     build: {
       cssMinify: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            particles: ['tsparticles-engine', 'tsparticles-slim'],
-          },
-        },
-      },
     },
   },
 });

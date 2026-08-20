@@ -1,68 +1,134 @@
 /* ========================================
-   Paleta de colores - Kharma Solutions
+   Kharma Solutions — Sistema de diseño
+   Paleta derivada del logo: navy #132e59 + cyan #2eaad0 / #59c4e2
    ======================================== */
 :root {
-  /* Primarios */
-  --color-primary: #3b82f6;
-  --color-primary-dark: #2563eb;
-  --color-primary-light: #60a5fa;
+  /* ----- Escala navy (superficies oscuras, texto) ----- */
+  --navy-900: #08182f;
+  --navy-800: #0d2344;
+  --navy-700: #132e59;
+  --navy-600: #1d4174;
+  --navy-500: #2a568f;
 
-  /* Gradiente principal */
-  --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  --gradient-primary-hover: linear-gradient(135deg, #2563eb, #7c3aed);
+  /* ----- Escala cyan (acento de marca) ----- */
+  --cyan-200: #b3e5f2;
+  --cyan-300: #7dd3ea;
+  --cyan-400: #59c4e2;
+  --cyan-500: #2eaad0;
+  --cyan-600: #1c87a8;
+  --cyan-700: #146b87;
+  --cyan-800: #125d75;
 
-  /* Neutros */
-  --color-white: #ffffff;
-  --color-gray-50: #f8fafc;
-  --color-gray-100: #f1f5f9;
-  --color-gray-200: #e2e8f0;
-  --color-gray-300: #cbd5e1;
-  --color-gray-400: #94a3b8;
-  --color-gray-500: #64748b;
-  --color-gray-600: #475569;
-  --color-gray-700: #334155;
-  --color-gray-800: #1e293b;
-  --color-gray-900: #0f172a;
+  /* ----- Neutros ----- */
+  --white: #ffffff;
+  --gray-50: #f7f9fc;
+  --gray-100: #eef2f8;
+  --gray-200: #dde5ef;
+  --gray-300: #c3cfde;
+  --gray-400: #93a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
 
-  /* Textos */
-  --color-text: #1e293b;
-  --color-text-light: #64748b;
-  --color-text-inverse: #ffffff;
+  /* Neutro claro sobre navy (9.2:1 sobre --navy-900) */
+  --navy-tint-200: #a8bdd4;
+  --navy-tint-300: #7f99b8;
 
-  /* Fondos */
-  --color-bg: #ffffff;
-  --color-bg-alt: #f8fafc;
+  /* ========================================
+     Tokens semánticos — los componentes usan SOLO estos
+     ======================================== */
 
-  /* Sombras */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Superficies */
+  --surface: var(--white);
+  --surface-sunken: var(--gray-50);
+  --surface-raised: var(--white);
+  --surface-inverse: var(--navy-900);
+  --surface-inverse-raised: var(--navy-800);
 
-  /* Tipografía */
-    --font-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
+  /* Texto — ratios verificados WCAG 2.1 */
+  --text: var(--navy-700);              /* 13.4:1 sobre blanco */
+  --text-strong: var(--navy-900);
+  --text-muted: var(--gray-500);
+  --text-inverse: var(--white);         /* 17.8:1 sobre navy-900 */
+  --text-inverse-muted: var(--navy-tint-200); /* 9.2:1 sobre navy-900 */
 
-  /* Espaciado */
+  /* Acento */
+  --accent: var(--cyan-500);            /* Relleno decorativo — 2.7:1, nunca texto ni UI informativa */
+  --accent-graphic: var(--cyan-700);    /* 6.0:1 — gráficos que SÍ comunican (WCAG 1.4.11) */
+  --accent-strong: var(--cyan-800);     /* Hover de botón: oscurece, nunca aclara */
+  --accent-text: var(--cyan-700);       /* 6.0:1 sobre blanco — texto/enlaces */
+  --accent-on-dark: var(--cyan-400);    /* 8.8:1 sobre navy-900 */
+  --accent-soft: rgba(46, 170, 208, 0.1);
+  --accent-soft-border: rgba(46, 170, 208, 0.24);
+
+  /* Bordes */
+  --border: var(--gray-200);
+  --border-subtle: var(--gray-100);
+  --border-strong: var(--gray-300);
+  --border-inverse: rgba(255, 255, 255, 0.12);
+  --border-inverse-strong: rgba(255, 255, 255, 0.22);
+
+  /* Foco (WCAG 2.4.7) */
+  --focus-ring: var(--cyan-600);
+  --focus-ring-inverse: var(--cyan-300);
+
+  /* Degradado — uso restringido: 2-3 apariciones por página */
+  --gradient-accent: linear-gradient(135deg, var(--navy-600), var(--cyan-500));
+  --gradient-accent-bright: linear-gradient(135deg, var(--cyan-500), var(--cyan-300));
+
+  /* Sombras — teñidas de navy en lugar de negro puro */
+  --shadow-sm: 0 1px 2px rgba(8, 24, 47, 0.06);
+  --shadow-md: 0 4px 16px rgba(8, 24, 47, 0.08);
+  --shadow-lg: 0 12px 32px rgba(8, 24, 47, 0.1);
+  --shadow-xl: 0 24px 56px rgba(8, 24, 47, 0.14);
+
+  /* ========================================
+     Tipografía — escala modular fluida
+     ======================================== */
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.0625rem, 1.02rem + 0.22vw, 1.1875rem);
+  --text-xl: clamp(1.1875rem, 1.11rem + 0.4vw, 1.4375rem);
+  --text-2xl: clamp(1.375rem, 1.24rem + 0.68vw, 1.75rem);
+  --text-3xl: clamp(1.625rem, 1.36rem + 1.3vw, 2.375rem);
+  --text-4xl: clamp(2rem, 1.55rem + 2.25vw, 3.25rem);
+  --text-5xl: clamp(2.5rem, 1.8rem + 3.5vw, 4.5rem);
+
+  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.035em;
+  --tracking-wide: 0.1em;
+
+  /* ========================================
+     Espaciado y contenedores
+     ======================================== */
+  --space-section: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --space-section-sm: clamp(3rem, 2.2rem + 3.5vw, 5.5rem);
+
+  --container-narrow: 720px;
+  --container-max: 1200px;
+  --container-wide: 1360px;
+  --container-padding: 1.25rem;
+
   --header-height: 72px;
 
-  /* Transiciones */
-  --transition-fast: 0.2s ease;
-  --transition-base: 0.3s ease;
+  /* ----- Transiciones ----- */
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Border radius */
+  /* ----- Radios ----- */
   --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
   --radius-full: 9999px;
-
-  /* Container */
-  --container-max: 1200px;
-  --container-padding: 1.25rem;
 }
 
-/* Reset moderno */
-
 /* ========================================
-   Fuente Inter - Local (estática por peso)
+   Fuente Inter — local, subsetada por peso
    ======================================== */
 @font-face {
   font-family: 'Inter';
@@ -114,6 +180,9 @@
   size-adjust: 107%;
 }
 
+/* ========================================
+   Reset
+   ======================================== */
 *,
 *::before,
 *::after {
@@ -125,15 +194,15 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
 }
-
 
 body {
   min-height: 100dvh;
   line-height: 1.6;
   font-family: var(--font-sans);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--text);
+  background-color: var(--surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: var(--header-height);
@@ -154,26 +223,284 @@ button,
 textarea,
 select {
   font: inherit;
+  color: inherit;
 }
 
-/* Skip link para accesibilidad */
+/* ========================================
+   Foco visible — WCAG 2.4.7
+   ======================================== */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Sobre superficies oscuras el anillo cambia a cyan claro */
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--focus-ring-inverse);
+}
+
+/* ========================================
+   Skip link
+   ======================================== */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 1rem;
-  padding: 0.5rem 1rem;
-  background: #000;
-  color: #fff;
   z-index: 9999;
-  border-radius: 0 0 0.25rem 0.25rem;
-  font-size: 0.875rem;
+  padding: 0.75rem 1.25rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-inverse);
+  background: var(--navy-700);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  text-decoration: none;
+  transition: top var(--transition-fast);
 }
 
 .skip-link:focus {
   top: 0;
 }
 
-/* Respeta preferencias del usuario */
+/* ========================================
+   Utilidades de sección (consolidadas)
+   ======================================== */
+.section {
+  position: relative;
+  padding: var(--space-section) 0;
+  background: var(--surface);
+}
+
+.section--sunken {
+  background: var(--surface-sunken);
+}
+
+.section--inverse {
+  background: var(--surface-inverse);
+  color: var(--text-inverse);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.container--wide {
+  max-width: var(--container-wide);
+}
+
+/* Eyebrow / label de sección */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-text);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.section--inverse .eyebrow {
+  color: var(--accent-on-dark);
+}
+
+/* Títulos de sección */
+.section-title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-tighter);
+  color: var(--text-strong);
+  text-wrap: balance;
+}
+
+.section--inverse .section-title {
+  color: var(--text-inverse);
+}
+
+.section-lead {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+.section--inverse .section-lead {
+  color: var(--text-inverse-muted);
+}
+
+/* ========================================
+   Botones
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primario: blanco sobre cyan-700 → 6.0:1 */
+.btn--primary {
+  color: var(--white);
+  background: var(--accent-text);
+}
+
+.btn--primary:hover {
+  background: var(--accent-strong);
+}
+
+/* Secundario sobre claro */
+.btn--secondary {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--border-strong);
+}
+
+.btn--secondary:hover {
+  background: var(--gray-50);
+  border-color: var(--navy-500);
+}
+
+/* Sobre superficies oscuras: navy-900 sobre cyan-400 → 8.8:1 */
+.btn--on-dark {
+  color: var(--navy-900);
+  background: var(--accent-on-dark);
+}
+
+.btn--on-dark:hover {
+  background: var(--cyan-300);
+}
+
+.btn--ghost-on-dark {
+  color: var(--text-inverse);
+  background: transparent;
+  border-color: var(--border-inverse-strong);
+}
+
+.btn--ghost-on-dark:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--text-inverse);
+}
+
+/* ========================================
+   Enlace con subrayado creciente
+   ======================================== */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+.section--inverse .link-underline {
+  color: var(--accent-on-dark);
+}
+
+/* ========================================
+   Scroll reveal — variantes
+   ======================================== */
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+[data-reveal='up'],
+[data-reveal=''] {
+  transform: translateY(24px);
+}
+
+[data-reveal='left'] {
+  transform: translateX(-28px);
+}
+
+[data-reveal='right'] {
+  transform: translateX(28px);
+}
+
+[data-reveal='scale'] {
+  transform: scale(0.96);
+}
+
+[data-reveal='fade'] {
+  transform: none;
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* El hero es contenido above-the-fold: nunca se oculta */
+.hero [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ========================================
+   Transiciones de página — CSS nativo, 0 KB de JS
+   ======================================== */
+@view-transition {
+  navigation: auto;
+}
+
+/* ========================================
+   Preferencias del usuario
+   ======================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -183,51 +510,16 @@ select {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-/* ========================================
-   Utilidades globales
-   ======================================== */
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-}
-
-/* ========================================
-   Scroll Reveal animations
-   ======================================== */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* El hero no necesita reveal delay */
-.hero [data-reveal],
-.hero__content,
-.hero__badge,
-.hero__title,
-.hero__description,
-.hero__actions,
-.hero__trust {
-  opacity: 1;
-  transform: none;
-}
-
-[data-reveal].revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
     transform: none;
-    transition: none;
+  }
+
+  @view-transition {
+    navigation: none;
   }
 }

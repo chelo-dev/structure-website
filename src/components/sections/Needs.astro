@@ -1,0 +1,156 @@
+---
+import { needs } from '../../data/needs';
+---
+
+<section id="que-necesitas" class="section section--sunken needs">
+  <div class="container">
+    <div class="needs__header">
+      <span class="eyebrow" data-reveal="fade">¿Qué necesitas?</span>
+      <h2 class="section-title needs__title" data-reveal="up">
+        Empecemos por tu problema,<br />no por la tecnología
+      </h2>
+    </div>
+
+    <ul class="needs__list" role="list" data-reveal-stagger="90">
+      {needs.map((need, index) => (
+        <li>
+          <a href={need.href} class="needs__card" data-reveal="up">
+            <span class="needs__index">{String(index + 1).padStart(2, '0')}</span>
+            <span class="needs__body">
+              <span class="needs__card-title">{need.title}</span>
+              <span class="needs__card-text">{need.description}</span>
+            </span>
+            <span class="needs__link">
+              {need.linkLabel}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M12 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .needs__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 42rem;
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .needs__title {
+    font-size: var(--text-3xl);
+  }
+
+  .needs__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* ========================================
+     Tarjeta
+     ======================================== */
+  .needs__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    padding: 1.75rem;
+    text-decoration: none;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition:
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
+  }
+
+  /* Barra de acento que crece desde la izquierda */
+  .needs__card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--transition-base);
+  }
+
+  .needs__card:hover {
+    border-color: var(--accent-soft-border);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .needs__card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .needs__index {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    color: var(--accent-text);
+  }
+
+  .needs__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+  }
+
+  .needs__card-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-strong);
+    text-wrap: balance;
+  }
+
+  .needs__card-text {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .needs__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent-text);
+  }
+
+  .needs__link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-base);
+  }
+
+  .needs__card:hover .needs__link svg {
+    transform: translateX(5px);
+  }
+
+  @media (min-width: 640px) {
+    .needs__list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      max-width: 46rem;
+    }
+  }
+</style>

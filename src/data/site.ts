@@ -1,6 +1,7 @@
 export const siteConfig = {
     name: 'Kharma Solutions',
-    description: 'Desarrollo profesional de sitios web, landing pages y sistemas web a medida. Impulsa tu negocio con presencia digital de alto impacto.',
+    description: 'Soy Angel Paredes, desarrollador web independiente. Creo sitios web y sistemas administrativos personalizados para negocios y emprendedores.',
+    tagline: 'Desarrollo Web & Sistemas a Medida',
     url: 'https://kharmasolutions.com',
     ogImage: '/og-image.svg',
     locale: 'es_MX',
@@ -10,15 +11,21 @@ export const siteConfig = {
         state: 'Morelos',
         country: 'México',
     },
+    person: {
+        name: 'Angel Paredes Torres',
+        shortName: 'Angel Paredes',
+        role: 'Desarrollador Web',
+        specialty: 'Desarrollo Web & Sistemas a Medida',
+    },
     social: {
         facebook: '',
         instagram: '',
     },
     nav: [
         { label: 'Inicio', href: '/#inicio' },
-        { label: 'Sobre', href: '/#sobre' },
+        { label: 'Sobre mí', href: '/sobre-mi' },
         { label: 'Servicios', href: '/#servicios' },
-        { label: 'Planes', href: '/#planes' },
+        { label: 'Precios', href: '/#planes' },
         { label: 'Contacto', href: '/#contacto' },
     ],
     legal: [

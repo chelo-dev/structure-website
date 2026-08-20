@@ -1,443 +1,287 @@
 ---
-import { about, stats } from "../../data/about";
+import { Image } from "astro:assets";
+import { about } from "../../data/about";
+import perfil from "../../assets/images/perfil.jpg";
+
+const iconPaths: Record<string, string[]> = {
+  check: [
+    "M22 11.08V12a10 10 0 11-5.93-9.14",
+    "M22 4L12 14.01l-3-3",
+  ],
+  design: [
+    "M12 19l7-7 3 3-7 7-3-3z",
+    "M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z",
+    "M2 2l7.586 7.586",
+  ],
+  code: [
+    "M16 18l6-6-6-6",
+    "M8 6l-6 6 6 6",
+    "M14 4l-4 16",
+  ],
+  shield: [
+    "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+    "M9 12l2 2 4-4",
+  ],
+};
 ---
 
-<section id="sobre" class="about">
-  <div class="about__container">
-    <!-- Encabezado -->
-    <div class="about__header">
-      <span class="about__label">Sobre nosotros</span>
-      <h2 class="about__title">
-        Impulsar tu negocio digital
-        <span class="about__title-gradient">es nuestra misión</span>
-      </h2>
-      <p class="about__description">
-        En Kharma Solutions nos enfocamos en una sola cosa: crear sitios web que
-        realmente funcionen para tu negocio. No somos una agencia gigante con
-        procesos interminables — somos un equipo ágil con más de 4 años de
-        experiencia y 40 proyectos entregados que hablan por sí mismos.
-      </p>
-      <p class="about__description">
-        Desde landing pages de alto impacto hasta sistemas de administración
-        completamente personalizados, nos encargamos de cada detalle para que tú
-        solo te preocupes por hacer crecer tu negocio.
-      </p>
-    </div>
+<section id="sobre" class="section about">
+  <div class="container">
+    <div class="about__layout">
+      <!-- Columna sticky: retrato + firma -->
+      <aside class="about__aside">
+        <figure class="about__portrait" data-reveal="scale">
+          <Image
+            src={perfil}
+            alt="Angel Paredes Torres, desarrollador web"
+            width={560}
+            format="webp"
+            quality={80}
+            loading="lazy"
+            decoding="async"
+            class="about__portrait-img"
+          />
+          <figcaption class="about__caption">
+            <span class="about__caption-name">Angel Paredes Torres</span>
+            <span class="about__caption-role">Desarrollador Web</span>
+          </figcaption>
+        </figure>
+      </aside>
 
-    <!-- Stats -->
-    <div class="about__stats">
-      {
-        stats.map((stat) => (
-          <div class="about__stat">
-            <span class="about__stat-number">{stat.number}</span>
-            <span class="about__stat-label">{stat.label}</span>
-          </div>
-        ))
-      }
-    </div>
+      <!-- Columna de prosa -->
+      <div class="about__main">
+        <span class="eyebrow" data-reveal="fade">Sobre mí</span>
 
-    <!-- Valores / Diferenciadores -->
-    <div class="about__grid">
-      {
-        about.map((item, index) => (
-          <article
-            class="about__card"
-            data-reveal
-            data-reveal-delay={index * 100}
-          >
-            <div class="about__card-icon" data-icon={item.icon}>
-              {item.icon === "quality" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              )}
-              {item.icon === "rocket" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
-                  <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
-                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                </svg>
-              )}
-              {item.icon === "design" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 19l7-7 3 3-7 7-3-3z" />
-                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-                  <path d="M2 2l7.586 7.586" />
-                  <circle cx="11" cy="11" r="2" />
-                </svg>
-              )}
-              {item.icon === "code" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="16 18 22 12 16 6" />
-                  <polyline points="8 6 2 12 8 18" />
-                  <line x1="14" y1="4" x2="10" y2="20" />
-                </svg>
-              )}
-              {item.icon === "shield" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <polyline points="9 12 11 14 15 10" />
-                </svg>
-              )}
-              {item.icon === "check" && (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-              )}
-            </div>
-            <h3 class="about__card-title">{item.title}</h3>
-            <p class="about__card-description">{item.description}</p>
-          </article>
-        ))
-      }
-    </div>
+        <h2 class="section-title about__title" data-reveal="up">Hola, soy Angel</h2>
 
-    <!-- CTA -->
-    <div class="about__cta">
-      <p class="about__cta-text">
-        ¿Listo para llevar tu negocio al mundo digital?
-      </p>
-      <a href="#planes" class="about__cta-btn">
-        Conoce nuestros planes
-        <svg
-          class="about__cta-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M5 12h14"></path>
-          <path d="M12 5l7 7-7 7"></path>
-        </svg>
-      </a>
+        <div class="about__prose">
+          <p data-reveal="up">
+            Soy desarrollador web y creador de Kharma Solutions. Me especializo
+            en crear sitios web y sistemas personalizados para negocios que
+            buscan mejorar su presencia digital o automatizar parte de su
+            operación.
+          </p>
+
+          <blockquote class="about__quote" data-reveal="left">
+            Trabajo directamente con cada cliente para entender qué necesita
+            realmente y desarrollar una solución que tenga sentido para su
+            negocio.
+          </blockquote>
+
+          <p data-reveal="up">
+            No trabajo con soluciones genéricas cuando el proyecto necesita algo
+            más. Desde una página web hasta un sistema administrativo completo,
+            cada proyecto se desarrolla pensando en sus objetivos y
+            posibilidades de crecimiento.
+          </p>
+        </div>
+
+        <!-- Mi forma de trabajar -->
+        <h3 class="about__subtitle" data-reveal="up">Mi forma de trabajar</h3>
+
+        <ul class="about__values" role="list" data-reveal-stagger="70">
+          {about.map((item) => (
+            <li class="about__value" data-reveal="up">
+              <span class="about__value-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {(iconPaths[item.icon] ?? iconPaths.check).map((d) => (
+                    <path d={d} />
+                  ))}
+                </svg>
+              </span>
+              <span class="about__value-body">
+                <span class="about__value-title">{item.title}</span>
+                <span class="about__value-text">{item.description}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <a href="/#planes" class="link-underline about__cta" data-reveal="fade">
+          Ver opciones para comenzar
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   /* ========================================
-     About Section
+     Layout editorial asimétrico
      ======================================== */
-  .about {
-    position: relative;
-    padding: 6rem 0;
-    background: var(--color-bg);
-    overflow: hidden;
-  }
-
-  .about::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-gray-200),
-      transparent
-    );
-  }
-
-  .about__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-  }
-
-  /* ========================================
-     Header
-     ======================================== */
-  .about__header {
-    max-width: 680px;
-    margin: 0 auto 3.5rem;
-    text-align: center;
-  }
-
-  .about__label {
-    display: inline-block;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-  }
-
-  .about__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--color-gray-900);
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
-  }
-
-  .about__title-gradient {
-    display: block;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .about__description {
-    font-size: 1rem;
-    line-height: 1.75;
-    color: var(--color-gray-500);
-  }
-
-  .about__description + .about__description {
-    margin-top: 0.75rem;
-  }
-
-  /* ========================================
-     Stats
-     ======================================== */
-  .about__stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    max-width: 720px;
-    margin: 0 auto 3.5rem;
-  }
-
-  .about__stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 1.5rem 1rem;
-    border-radius: var(--radius-lg);
-    background: var(--color-gray-50);
-    border: 1px solid var(--color-gray-100);
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base);
-  }
-
-  .about__stat:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .about__stat-number {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 800;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .about__stat-label {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-gray-500);
-    text-align: center;
-  }
-
-  /* ========================================
-     Cards grid
-     ======================================== */
-  .about__grid {
+  .about__layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin-bottom: 3.5rem;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
   }
 
-  .about__card {
+  /* ----- Retrato ----- */
+  .about__portrait {
     position: relative;
-    padding: 1.75rem;
+    max-width: 300px;
+    margin: 0;
     border-radius: var(--radius-lg);
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-100);
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base),
-      border-color var(--transition-base);
+    overflow: hidden;
+    background: var(--surface-sunken);
   }
 
-  .about__card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(59, 130, 246, 0.15);
+  .about__portrait-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
   }
 
-  .about__card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-  }
-
-  .about__card:hover::after {
-    opacity: 1;
-  }
-
-  /* Iconos */
-  .about__card-icon {
-    width: 44px;
-    height: 44px;
+  .about__caption {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.1),
-      rgba(139, 92, 246, 0.1)
-    );
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    transition: transform var(--transition-fast);
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 1rem 1.125rem;
+    background: var(--navy-700);
   }
 
-  .about__card:hover .about__card-icon {
-    transform: scale(1.1);
-  }
-
-  .about__card-icon svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .about__card-title {
-    font-size: 1.0625rem;
+  .about__caption-name {
+    font-size: var(--text-sm);
     font-weight: 700;
-    color: var(--color-gray-800);
-    margin-bottom: 0.5rem;
+    color: var(--text-inverse);
   }
 
-  .about__card-description {
-    font-size: 0.875rem;
-    line-height: 1.65;
-    color: var(--color-gray-500);
+  .about__caption-role {
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-on-dark);
   }
 
   /* ========================================
-     CTA
+     Prosa
      ======================================== */
-  .about__cta {
-    text-align: center;
+  .about__title {
+    margin: 1rem 0 1.75rem;
   }
 
-  .about__cta-text {
-    font-size: 1.125rem;
+  .about__prose {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 62ch;
+  }
+
+  .about__prose p {
+    font-size: var(--text-lg);
+    line-height: 1.75;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  /* Cita destacada */
+  .about__quote {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--accent);
+    font-size: var(--text-xl);
     font-weight: 500;
-    color: var(--color-gray-600);
-    margin-bottom: 1.25rem;
+    line-height: 1.55;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-strong);
+    text-wrap: pretty;
   }
 
-  .about__cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8125rem 1.75rem;
-    font-size: 0.9375rem;
+  /* ========================================
+     Mi forma de trabajar
+     ======================================== */
+  .about__subtitle {
+    margin: clamp(2.5rem, 4vw, 3.5rem) 0 1.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: var(--text-sm);
     font-weight: 600;
-    text-decoration: none;
-    color: var(--color-white);
-    background: var(--gradient-primary);
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-muted);
   }
 
-  .about__cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.45);
+  .about__values {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
-  .about__cta-icon {
-    width: 18px;
-    height: 18px;
-    transition: transform var(--transition-fast);
+  .about__value {
+    display: flex;
+    gap: 1rem;
   }
 
-  .about__cta-btn:hover .about__cta-icon {
-    transform: translateX(4px);
+  .about__value-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    color: var(--accent-text);
+    background: var(--accent-soft);
+  }
+
+  .about__value-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .about__value-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .about__value-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .about__value-text {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .about__cta {
+    font-size: var(--text-base);
   }
 
   /* ========================================
      Responsive
      ======================================== */
-  @media (min-width: 640px) {
-    .about__grid {
+  @media (min-width: 720px) {
+    .about__values {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (min-width: 768px) {
-    .about {
-      padding: 7rem 0;
+  @media (min-width: 960px) {
+    .about__layout {
+      grid-template-columns: minmax(240px, 300px) 1fr;
+      align-items: start;
     }
 
-    .about__stats {
-      grid-template-columns: repeat(4, 1fr);
+    /* El retrato acompaña la lectura de la columna larga */
+    .about__aside {
+      position: sticky;
+      top: calc(var(--header-height) + 2.5rem);
     }
-  }
 
-  @media (min-width: 1024px) {
-    .about__grid {
-      grid-template-columns: repeat(3, 1fr);
+    .about__title {
+      margin-top: 0.75rem;
     }
   }
 </style>

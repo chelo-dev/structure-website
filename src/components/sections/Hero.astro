@@ -2,31 +2,30 @@
 import { siteConfig, whatsappLink, channels } from "../../data/site";
 ---
 
-<section id="inicio" class="hero">
-  <!-- Partículas de fondo -->
-  <div id="hero-particles" class="hero__particles" aria-hidden="true"></div>
+<section id="inicio" class="hero on-dark">
+  <!-- Ambiente: 100% CSS, sin JavaScript -->
+  <div class="hero__ambient" aria-hidden="true">
+    <div class="hero__grid"></div>
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+  </div>
 
-  <!-- Gradiente overlay -->
-  <div class="hero__overlay" aria-hidden="true"></div>
-
-  <div class="hero__container">
-    <!-- Contenido izquierdo -->
+  <div class="hero__container container--wide">
     <div class="hero__content">
       <span class="hero__badge">
         <span class="hero__badge-dot" aria-hidden="true"></span>
-        Desarrollo web profesional
+        {siteConfig.person.specialty}
       </span>
 
       <h1 class="hero__title">
-        Transformamos tu idea en una
-        <span class="hero__title-gradient">experiencia digital</span>
-        que genera resultados
+        Desarrollo sitios web y sistemas
+        <em class="hero__title-accent">que se adaptan a tu negocio</em>
       </h1>
 
       <p class="hero__description">
-        Diseñamos y desarrollamos sitios web de alto rendimiento, landing pages
-        que convierten y sistemas de administración a medida para impulsar tu
-        negocio al siguiente nivel.
+        Soy <strong>Angel Paredes Torres</strong>, desarrollador web independiente.
+        Creo sitios web y sistemas administrativos
+        personalizados para negocios y emprendedores.
       </p>
 
       <div class="hero__actions">
@@ -34,28 +33,23 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          class="hero__btn hero__btn--primary"
-          aria-label="Contactar por WhatsApp"
+          class="btn btn--on-dark"
         >
           <svg
             class="hero__btn-icon"
             viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="currentColor"
             aria-hidden="true"
           >
             <path
-              d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+              d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 004.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.5.05-1 .25-3.3-.69-2.8-1.15-4.6-3.99-4.74-4.17-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.02.97-2.3.24-.26.53-.32.71-.32h.5c.16 0 .38-.03.58.44.24.57.8 1.98.87 2.12.07.14.11.31.02.5-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.55.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.27.14.44.2.51.32.07.11.07.68-.17 1.36z"
             ></path>
           </svg>
-          Cotiza tu proyecto
+          Cuéntame tu proyecto
         </a>
 
-        <a href="#servicios" class="hero__btn hero__btn--secondary">
-          Ver servicios
+        <a href="#servicios" class="btn btn--ghost-on-dark">
+          Ver mis servicios
           <svg
             class="hero__btn-icon"
             viewBox="0 0 24 24"
@@ -71,45 +65,32 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
         </a>
       </div>
 
-      <!-- Trust signals -->
-      <div class="hero__trust">
-        <div class="hero__trust-item">
-          <span class="hero__trust-number">50+</span>
-          <span class="hero__trust-label">Proyectos entregados</span>
-        </div>
-        <div class="hero__trust-divider" aria-hidden="true"></div>
-        <div class="hero__trust-item">
-          <span class="hero__trust-number">100%</span>
-          <span class="hero__trust-label">Clientes satisfechos</span>
-        </div>
-        <div class="hero__trust-divider" aria-hidden="true"></div>
-        <div class="hero__trust-item">
-          <span class="hero__trust-number">5★</span>
-          <span class="hero__trust-label">Calificación promedio</span>
-        </div>
-      </div>
+      <ul class="hero__traits" role="list">
+        <li class="hero__trait">Desarrollo personalizado</li>
+        <li class="hero__trait">Atención directa</li>
+        <li class="hero__trait">Código propio</li>
+      </ul>
     </div>
 
-    <!-- Recurso planetario -->
-    <div class="hero__orbit-wrapper" aria-hidden="true">
-      <div class="channels">
-        <!-- Círculo punteado -->
-        <div class="channels__circle"></div>
+    <!-- Canales: ahora también visible en móvil -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__orbit">
+        <div class="hero__orbit-ring hero__orbit-ring--outer"></div>
+        <div class="hero__orbit-ring hero__orbit-ring--inner"></div>
 
-        <!-- Órbita -->
-        <div class="channels__orbit">
+        <div class="hero__orbit-track">
           {
             channels.map((channel, i) => (
               <div
-                class="channels__item"
+                class="hero__channel"
                 style={`--i: ${i}; --total: ${channels.length}`}
               >
-                <div class="channels__icon">
+                <div class="hero__channel-icon">
                   <img
                     src={channel.icon}
-                    alt={channel.name}
-                    width="48"
-                    height="48"
+                    alt=""
+                    width="40"
+                    height="40"
                     loading="lazy"
                     decoding="async"
                   />
@@ -119,21 +100,15 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
           }
         </div>
 
-        <!-- Núcleo central -->
-        <div class="channels__nucleus">
-          <div class="channels__glow"></div>
-          <div class="channels__ring"></div>
-          <div class="channels__logo">
-            <img
-              src="/logo-mark.webp"
-              alt={`${siteConfig.name} logo`}
-              width="100"
-              height="100"
-              loading="lazy"
-              decoding="async"
-              class="jello-diagonal-1"
-            />
-          </div>
+        <div class="hero__core">
+          <img
+            src="/logo-mark.webp"
+            alt={`${siteConfig.name}`}
+            width="88"
+            height="88"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
@@ -142,145 +117,192 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
 
 <style>
   /* ========================================
-     Hero Section
+     Hero
      ======================================== */
   .hero {
     position: relative;
-    min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--color-gray-900);
+    min-height: min(100svh, 900px);
+    padding: clamp(3.5rem, 2rem + 7vw, 7rem) 0 clamp(3rem, 2rem + 5vw, 6rem);
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
     overflow: hidden;
-    padding: 6rem 0 4rem;
   }
 
-  .hero__particles {
+  /* ========================================
+     Ambiente CSS (reemplaza tsParticles)
+     ======================================== */
+  .hero__ambient {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    pointer-events: none;
   }
 
-  .hero__overlay {
+  /* Retícula de puntos — coste cero, textura técnica */
+  .hero__grid {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(
-        ellipse at 20% 50%,
-        rgba(59, 130, 246, 0.15) 0%,
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse at 80% 50%,
-        rgba(139, 92, 246, 0.1) 0%,
-        transparent 60%
-      );
-    z-index: 1;
+    background-image: radial-gradient(
+      circle,
+      rgba(89, 196, 226, 0.28) 1px,
+      transparent 1px
+    );
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 75%);
+    opacity: 0.5;
   }
 
+  /* Resplandores pre-difuminados con radial-gradient:
+     no usan filter:blur(), así que no generan repintados por frame */
+  .hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .hero__glow--1 {
+    width: clamp(420px, 55vw, 780px);
+    aspect-ratio: 1;
+    top: -18%;
+    right: -12%;
+    background: radial-gradient(
+      circle,
+      rgba(46, 170, 208, 0.3) 0%,
+      rgba(46, 170, 208, 0.1) 40%,
+      transparent 68%
+    );
+    animation: hero-drift-a 26s ease-in-out infinite alternate;
+  }
+
+  .hero__glow--2 {
+    width: clamp(360px, 45vw, 620px);
+    aspect-ratio: 1;
+    bottom: -22%;
+    left: -14%;
+    background: radial-gradient(
+      circle,
+      rgba(29, 65, 116, 0.55) 0%,
+      rgba(29, 65, 116, 0.2) 45%,
+      transparent 70%
+    );
+    animation: hero-drift-b 32s ease-in-out infinite alternate;
+  }
+
+  @keyframes hero-drift-a {
+    to {
+      transform: translate3d(-6%, 8%, 0) scale(1.12);
+    }
+  }
+
+  @keyframes hero-drift-b {
+    to {
+      transform: translate3d(8%, -6%, 0) scale(1.08);
+    }
+  }
+
+  /* ========================================
+     Layout
+     ======================================== */
   .hero__container {
     position: relative;
-    z-index: 2;
-    max-width: var(--container-max);
+    z-index: 1;
+    width: 100%;
     margin: 0 auto;
     padding: 0 var(--container-padding);
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 3rem;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .hero__content {
+    max-width: 40rem;
   }
 
   /* ========================================
-     Contenido
+     Badge
      ======================================== */
-  .hero__content {
-    position: relative;
-    z-index: 3;
-    max-width: 600px;
-  }
-
   .hero__badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.375rem 1rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-primary-light);
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 0.375rem 0.875rem;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent-on-dark);
+    background: rgba(46, 170, 208, 0.1);
+    border: 1px solid rgba(46, 170, 208, 0.28);
     border-radius: var(--radius-full);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   .hero__badge-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-primary-light);
-    animation: badge-pulse 2s ease-in-out infinite;
+    background: var(--accent-on-dark);
+    animation: hero-pulse 2.4s ease-in-out infinite;
   }
 
-  @keyframes badge-pulse {
+  @keyframes hero-pulse {
     0%,
     100% {
       opacity: 1;
     }
     50% {
-      opacity: 0.4;
+      opacity: 0.35;
     }
   }
 
+  /* ========================================
+     Titular editorial
+     ======================================== */
   .hero__title {
-    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-size: var(--text-5xl);
     font-weight: 800;
-    line-height: 1.15;
-    color: var(--color-white);
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
+    line-height: 1.04;
+    letter-spacing: var(--tracking-tighter);
+    color: var(--text-inverse);
+    text-wrap: balance;
+    margin-bottom: 1.5rem;
   }
 
-  .hero__title-gradient {
-    background: var(--gradient-primary);
+  .hero__title-accent {
+    display: block;
+    font-style: normal;
+    background: var(--gradient-accent-bright);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--accent-on-dark);
   }
 
   .hero__description {
-    font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+    font-size: var(--text-lg);
     line-height: 1.7;
-    color: var(--color-gray-400);
-    margin-bottom: 2rem;
-    max-width: 520px;
+    color: var(--text-inverse-muted);
+    max-width: 34rem;
+    margin-bottom: 2.25rem;
+    text-wrap: pretty;
+  }
+
+  .hero__description strong {
+    color: var(--text-inverse);
+    font-weight: 700;
   }
 
   /* ========================================
-     Botones
+     Acciones
      ======================================== */
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.875rem;
+    gap: 0.75rem;
     margin-bottom: 2.5rem;
-  }
-
-  .hero__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8125rem 1.625rem;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: var(--radius-full);
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-base),
-      background var(--transition-base);
-  }
-
-  .hero__btn:hover {
-    transform: translateY(-2px);
   }
 
   .hero__btn-icon {
@@ -289,440 +311,173 @@ import { siteConfig, whatsappLink, channels } from "../../data/site";
     flex-shrink: 0;
   }
 
-  .hero__btn--primary {
-    color: var(--color-white);
-    background: var(--gradient-primary);
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
-  }
-
-  .hero__btn--primary:hover {
-    background: var(--gradient-primary-hover);
-    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
-  }
-
-  .hero__btn--secondary {
-    color: var(--color-gray-300);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-  }
-
-  .hero__btn--secondary:hover {
-    color: var(--color-white);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.06);
-  }
-
   /* ========================================
-     Trust signals
+     Atributos
      ======================================== */
-  .hero__trust {
+  .hero__traits {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border-inverse);
   }
 
-  .hero__trust-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-
-  .hero__trust-number {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-white);
-  }
-
-  .hero__trust-label {
-    font-size: 0.75rem;
-    color: var(--color-gray-500);
-  }
-
-  .hero__trust-divider {
-    width: 1px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  /* ========================================
-     Recurso planetario
-     ======================================== */
-  .hero__orbit-wrapper {
-    position: absolute;
-    top: 50%;
-    right: -30%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.35;
-    pointer-events: auto;
-    z-index: 1;
-  }
-
-  .channels {
+  .hero__trait {
     position: relative;
-    width: min(480px, 75vw);
-    height: min(480px, 75vw);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: var(--text-sm);
+    color: var(--text-inverse-muted);
   }
 
-  /* Círculo punteado */
-  .channels__circle {
+  .hero__trait:not(:last-child)::after {
+    content: '';
     position: absolute;
-    width: 75%;
-    height: 75%;
+    right: -0.875rem;
+    top: 50%;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
-    border: 1px dashed rgba(255, 255, 255, 0.15);
+    background: var(--accent-on-dark);
+    transform: translateY(-50%);
   }
 
-  /* Órbita contenedora */
-  .channels__orbit {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: orbit-rotate 80s linear infinite;
+  /* ========================================
+     Visual orbital — ahora visible en móvil
+     ======================================== */
+  .hero__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Cada item orbital */
-  .channels__item {
+  .hero__orbit {
+    position: relative;
+    width: min(320px, 78vw);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .hero__orbit-ring {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+    border-radius: 50%;
+    border: 1px solid var(--border-inverse);
+  }
+
+  .hero__orbit-ring--outer {
+    inset: 0;
+  }
+
+  .hero__orbit-ring--inner {
+    inset: 22%;
+    border-style: dashed;
+    border-color: rgba(89, 196, 226, 0.22);
+  }
+
+  .hero__orbit-track {
+    position: absolute;
+    inset: 0;
+    animation: hero-orbit 44s linear infinite;
+  }
+
+  .hero__channel {
+    position: absolute;
+    inset: 0;
     transform: rotate(calc(360deg / var(--total) * var(--i)));
   }
 
-  .channels__icon {
+  .hero__channel-icon {
     position: absolute;
-    width: clamp(64px, 12vw, 88px);
-    height: clamp(64px, 12vw, 88px);
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    width: clamp(42px, 11vw, 56px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    animation: orbit-counter-rotate 80s linear infinite;
-    transition:
-      transform 0.4s ease,
-      box-shadow 0.4s ease;
+    background: var(--navy-800);
+    border: 1px solid var(--border-inverse-strong);
+    transform: translate(-50%, -50%);
+    animation: hero-orbit-counter 44s linear infinite;
   }
 
-  .channels__icon:hover {
-    transform: translateX(-50%) scale(1.15);
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-  }
-
-  .channels__icon img {
-    width: 55%;
-    height: 55%;
+  .hero__channel-icon img {
+    width: 52%;
+    height: 52%;
     object-fit: contain;
   }
 
-  /* Núcleo central */
-  .channels__nucleus {
+  .hero__core {
     position: relative;
-    z-index: 5;
-    width: clamp(110px, 20vw, 160px);
-    height: clamp(110px, 20vw, 160px);
+    width: 42%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    background: radial-gradient(
+      circle at 50% 40%,
+      rgba(46, 170, 208, 0.22),
+      transparent 70%
+    );
   }
 
-  .channels__glow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    /* background: linear-gradient(135deg, #3b82f6, #8b5cf6); */
-    animation: nucleus-glow 3s ease-in-out infinite alternate;
+  .hero__core img {
+    width: 72%;
+    height: auto;
   }
 
-  .channels__ring {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    animation: ring-rotate 10s linear infinite;
-  }
-
-  .channels__logo {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Animaciones del planetario */
-  @keyframes orbit-rotate {
-    from {
-      transform: rotate(0deg);
-    }
+  @keyframes hero-orbit {
     to {
       transform: rotate(360deg);
     }
   }
 
-  @keyframes orbit-counter-rotate {
-    from {
-      transform: translateX(-50%) rotate(0deg);
-    }
+  @keyframes hero-orbit-counter {
     to {
-      transform: translateX(-50%) rotate(-360deg);
-    }
-  }
-
-  @keyframes nucleus-glow {
-    0% {
-      box-shadow:
-        0 0 20px rgba(59, 130, 246, 0.4),
-        0 0 60px rgba(139, 92, 246, 0.2);
-    }
-    100% {
-      box-shadow:
-        0 0 40px rgba(59, 130, 246, 0.6),
-        0 0 80px rgba(139, 92, 246, 0.3);
-    }
-  }
-
-  @keyframes ring-rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
+      transform: translate(-50%, -50%) rotate(-360deg);
     }
   }
 
   /* ========================================
      Responsive
      ======================================== */
-  @media (min-width: 1024px) {
+  @media (min-width: 900px) {
     .hero__container {
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
     }
 
-    .hero__orbit-wrapper {
-      position: relative;
-      top: auto;
-      right: auto;
-      transform: none;
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 2;
+    .hero__orbit {
+      width: min(420px, 38vw);
     }
   }
 
-  /* En móvil la órbita contiene 6× backdrop-filter:blur(8px) + 4 animaciones CSS continuas.
-     Con display:none el navegador elimina esos layers del árbol de composición completamente. */
-  @media (max-width: 767px) {
-    .hero__orbit-wrapper {
-      display: none;
+  /* En móvil se reduce la escala del recurso pero NO se oculta */
+  @media (max-width: 899px) {
+    .hero__visual {
+      order: -1;
+      margin-bottom: 0.5rem;
     }
 
-    /* El botón secundario usa backdrop-filter — se sustituye por fondo sólido en móvil */
-    .hero__btn--secondary {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* La animación del badge-dot puede diferirse; no afecta LCP pero sí al main thread */
-    .hero__badge-dot {
-      animation: none;
-      opacity: 1;
+    .hero__orbit {
+      width: min(240px, 62vw);
     }
   }
 
-  @media (max-width: 640px) {
-    .hero {
-      padding: 5rem 0 3rem;
-    }
-
-    .hero__actions {
-      flex-direction: column;
-    }
-
-    .hero__btn {
-      justify-content: center;
+  @media (max-width: 480px) {
+    .hero__actions .btn {
       width: 100%;
     }
-
-    .hero__trust {
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .hero__trust-divider {
-      display: none;
-    }
-
-    .hero__trust-item {
-      flex-direction: row;
-      align-items: center;
-      gap: 0.5rem;
-    }
   }
 
-  .jello-diagonal-1 {
-    -webkit-animation: jello-diagonal-1 0.8s both;
-    animation: jello-diagonal-1 0.8s both;
-  }
-
-  /* ----------------------------------------------
-  * Generated by Animista on 2026-2-13 18:13:14
-  * Licensed under FreeBSD License.
-  * See http://animista.net/license for more info. 
-  * w: http://animista.net, t: @cssanimista
-  * ---------------------------------------------- */
-
-  /**
-  * ----------------------------------------
-  * animation jello-diagonal-1
-  * ----------------------------------------
-  */
-  @-webkit-keyframes jello-diagonal-1 {
-    0% {
-      -webkit-transform: skew(0deg 0deg);
-      transform: skew(0deg 0deg);
-    }
-    30% {
-      -webkit-transform: skew(25deg 25deg);
-      transform: skew(25deg 25deg);
-    }
-    40% {
-      -webkit-transform: skew(-15deg, -15deg);
-      transform: skew(-15deg, -15deg);
-    }
-    50% {
-      -webkit-transform: skew(15deg, 15deg);
-      transform: skew(15deg, 15deg);
-    }
-    65% {
-      -webkit-transform: skew(-5deg, -5deg);
-      transform: skew(-5deg, -5deg);
-    }
-    75% {
-      -webkit-transform: skew(5deg, 5deg);
-      transform: skew(5deg, 5deg);
-    }
-    100% {
-      -webkit-transform: skew(0deg 0deg);
-      transform: skew(0deg 0deg);
-    }
-  }
-  @keyframes jello-diagonal-1 {
-    0% {
-      -webkit-transform: skew(0deg 0deg);
-      transform: skew(0deg 0deg);
-    }
-    30% {
-      -webkit-transform: skew(25deg 25deg);
-      transform: skew(25deg 25deg);
-    }
-    40% {
-      -webkit-transform: skew(-15deg, -15deg);
-      transform: skew(-15deg, -15deg);
-    }
-    50% {
-      -webkit-transform: skew(15deg, 15deg);
-      transform: skew(15deg, 15deg);
-    }
-    65% {
-      -webkit-transform: skew(-5deg, -5deg);
-      transform: skew(-5deg, -5deg);
-    }
-    75% {
-      -webkit-transform: skew(5deg, 5deg);
-      transform: skew(5deg, 5deg);
-    }
-    100% {
-      -webkit-transform: skew(0deg 0deg);
-      transform: skew(0deg 0deg);
+  /* La animación orbital y la deriva se detienen si se pide menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__orbit-track,
+    .hero__channel-icon,
+    .hero__glow,
+    .hero__badge-dot {
+      animation: none;
     }
   }
 </style>
-
-<script>
-  function initHeroParticles() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    // No cargar en móviles para mejorar rendimiento
-    if (window.innerWidth < 768) return;
-
-    const loadParticles = async () => {
-      const { tsParticles } = await import("tsparticles-engine");
-      const { loadSlim } = await import("tsparticles-slim");
-
-      await loadSlim(tsParticles);
-
-      await tsParticles.load("hero-particles", {
-        fullScreen: { enable: false },
-        fpsLimit: 30,
-        particles: {
-          number: {
-            value: 30,
-            density: { enable: true, area: 1200 },
-          },
-          color: {
-            value: ["#3b82f6", "#8b5cf6"],
-          },
-          opacity: {
-            value: { min: 0.1, max: 0.3 },
-          },
-          size: {
-            value: { min: 1, max: 2 },
-          },
-          links: {
-            enable: true,
-            distance: 120,
-            color: "#3b82f6",
-            opacity: 0.06,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 0.4,
-            direction: "none",
-            outModes: { default: "out" },
-          },
-        },
-        interactivity: {
-          events: {
-            onHover: { enable: false },
-          },
-        },
-        detectRetina: true,
-      });
-    };
-
-    // Esperar a que la página esté completamente cargada
-    if (document.readyState === "complete") {
-      setTimeout(loadParticles, 1000);
-    } else {
-      window.addEventListener("load", () => {
-        setTimeout(loadParticles, 1000);
-      });
-    }
-  }
-
-  initHeroParticles();
-</script>

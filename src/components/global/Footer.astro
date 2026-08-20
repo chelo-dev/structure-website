@@ -16,10 +16,10 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
       <!-- Logo -->
       <a href="/#inicio" class="footer__logo" aria-label={`${siteConfig.name} - Inicio`}>
         <img
-          src="/logo.webp"
+          src="/kharma_solutions_logo_edit.svg"
           alt={`${siteConfig.name} logo`}
-          width="244"
-          height="85"
+          width="294"
+          height="72"
           loading="lazy"
           decoding="async"
           class="footer__logo-img"
@@ -27,10 +27,12 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
       </a>
 
       <!-- Tagline -->
-      <p class="footer__tagline">
-        Desarrollamos sitios web rápidos y modernos. Hosting + Dominio
-        <strong>GRATIS</strong> el primer año. ¡Cotiza hoy mismo y lleva tu
-        negocio al siguiente nivel!
+      <p class="footer__tagline">{siteConfig.person.specialty}</p>
+      <p class="footer__person">
+        <strong>{siteConfig.person.name}</strong> — {siteConfig.person.role}
+      </p>
+      <p class="footer__services">
+        Sitios web · Sistemas personalizados
       </p>
 
       <!-- Links legales + WhatsApp -->
@@ -62,17 +64,8 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
   <div class="footer__bottom">
     <div class="footer__container">
       <p class="footer__copyright">
-        &copy; {currentYear} <strong>{siteConfig.name}</strong> — Todos los
-        derechos reservados.
-      </p>
-      <p class="footer__credit">
-        Diseñado por{' '}
-        
-        <a href={siteConfig.url}
-          class="footer__credit-link"
-        >
-          {siteConfig.name}
-        </a>
+        &copy; {currentYear} {siteConfig.person.shortName} /
+        <strong>{siteConfig.name}</strong> — Todos los derechos reservados.
       </p>
     </div>
   </div>
@@ -96,7 +89,8 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
      ======================================== */
   .footer {
     position: relative;
-    overflow: hidden;
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
   }
 
   .footer__container {
@@ -105,123 +99,110 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
     padding: 0 var(--container-padding);
   }
 
-  /* ========================================
-     Footer Top
-     ======================================== */
+  /* ----- Parte superior ----- */
   .footer__top {
-    padding: 3.5rem 0 2.5rem;
-    background: linear-gradient(165deg, #0f2a5e 0%, #0a1a3a 50%, #060e1f 100%);
+    padding: clamp(3rem, 2rem + 4vw, 4.5rem) 0 2.5rem;
     text-align: center;
   }
 
-  /* Logo */
   .footer__logo {
     display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
     text-decoration: none;
     margin-bottom: 1.5rem;
   }
 
   .footer__logo-img {
     width: auto;
-    height: 85px;
+    height: 32px;
     object-fit: contain;
   }
 
-  /* Tagline */
   .footer__tagline {
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    font-size: 0.875rem;
-    font-style: italic;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.55);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-on-dark);
+    margin-bottom: 0.625rem;
   }
 
-  .footer__tagline strong {
-    color: #facc15;
+  .footer__person {
+    font-size: var(--text-base);
+    color: var(--text-inverse-muted);
+    margin-bottom: 0.375rem;
+  }
+
+  .footer__person strong {
+    color: var(--text-inverse);
     font-weight: 700;
   }
 
-  /* Nav links */
-  .footer__nav {
-    margin-bottom: 0;
+  .footer__services {
+    max-width: 30rem;
+    margin: 0 auto 2rem;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--navy-tint-300);
   }
 
+  /* ----- Enlaces ----- */
   .footer__links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem 1.5rem;
+    gap: 0.5rem 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-inverse);
   }
 
   .footer__link {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #facc15;
-    text-decoration: none;
-    padding: 0.25rem 0;
     position: relative;
+    display: inline-block;
+    padding: 0.375rem 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-inverse-muted);
+    text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   .footer__link::after {
     content: '';
     position: absolute;
-    bottom: 0;
     left: 0;
-    width: 0;
-    height: 1px;
-    background: #facc15;
-    transition: width var(--transition-base);
-  }
-
-  .footer__link:hover::after {
-    width: 100%;
+    right: 0;
+    bottom: 0;
+    height: 1.5px;
+    background: var(--accent-on-dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
   }
 
   .footer__link:hover {
-    color: #fde68a;
+    color: var(--text-inverse);
   }
 
-  /* ========================================
-     Footer Bottom
-     ======================================== */
+  .footer__link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ----- Parte inferior ----- */
   .footer__bottom {
-    padding: 1.5rem 0;
-    background: linear-gradient(165deg, #091633 0%, #050d1f 100%);
+    padding: 1.25rem 0;
+    background: rgba(0, 0, 0, 0.22);
     text-align: center;
   }
 
   .footer__copyright {
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 0.375rem;
+    font-size: var(--text-xs);
+    color: var(--navy-tint-300);
   }
 
   .footer__copyright strong {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-inverse-muted);
     font-weight: 600;
-  }
-
-  .footer__credit {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-style: italic;
-  }
-
-  .footer__credit-link {
-    color: #facc15;
-    text-decoration: none;
-    font-weight: 600;
-    font-style: normal;
-    transition: color var(--transition-fast);
-  }
-
-  .footer__credit-link:hover {
-    color: #fde68a;
   }
 
   /* ========================================
@@ -229,28 +210,26 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
      ======================================== */
   .scroll-top {
     position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 90;
     width: 44px;
     height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-inverse-strong);
     border-radius: 50%;
-    background: var(--gradient-primary);
-    color: var(--color-white);
+    background: var(--navy-700);
+    color: var(--text-inverse);
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(12px);
+    transform: translateY(10px);
     transition:
       opacity var(--transition-base),
       visibility var(--transition-base),
       transform var(--transition-base),
-      box-shadow var(--transition-fast);
-    z-index: 90;
+      background var(--transition-fast);
   }
 
   .scroll-top.visible {
@@ -260,30 +239,19 @@ const whatsappLink = `https://wa.me/${siteConfig.phone}?text=${whatsappMessage}`
   }
 
   .scroll-top:hover {
-    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.55);
-    transform: translateY(-2px);
-  }
-
-  .scroll-top.visible:hover {
-    transform: translateY(-2px);
+    background: var(--accent-strong);
+    border-color: var(--accent);
   }
 
   .scroll-top svg {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
   }
 
-  /* ========================================
-     Responsive
-     ======================================== */
-  @media (max-width: 640px) {
-    .footer__top {
-      padding: 2.5rem 0 2rem;
-    }
-
+  @media (max-width: 560px) {
     .footer__links {
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
   }
 </style>

@@ -38,7 +38,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .page-404__code {
     font-size: clamp(4rem, 15vw, 8rem);
     font-weight: 800;
-    background: var(--gradient-primary);
+    background: var(--gradient-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -48,13 +48,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   .page-404__title {
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 700;
-    color: var(--color-gray-800);
+    color: var(--text-strong);
     margin: 0.75rem 0 0.5rem;
   }
 
   .page-404__text {
     font-size: 1rem;
-    color: var(--color-gray-500);
+    color: var(--text-muted);
     margin-bottom: 2rem;
   }
 
@@ -65,16 +65,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: 0.75rem 1.5rem;
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--color-white);
-    background: var(--gradient-primary);
+    color: var(--white);
+    background: var(--accent-text);
     border-radius: var(--radius-full);
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
-    transition: transform var(--transition-fast), box-shadow var(--transition-base);
+    transition: background var(--transition-fast);
   }
 
   .page-404__btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.45);
+    background: var(--accent-strong);
   }
 </style>
