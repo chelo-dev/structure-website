@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [sitemap()],
   compressHTML: true,
   build: {
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
   },
   vite: {
     build: {
