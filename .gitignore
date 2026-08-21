@@ -1,5 +1,6 @@
 # build output
 dist/
+
 # generated types
 .astro/
 
@@ -19,6 +20,18 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+.vscode
 
 # jetbrains setting folder
 .idea/
+
+# claude
+CLAUDE.md
+node_modules/
+dist/
+.env
+
+# Analisis rendimiento web
+.unlighthouse/
+
+docs/
